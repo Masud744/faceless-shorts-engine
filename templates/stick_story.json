@@ -1,0 +1,29 @@
+{
+  "name": "Stick Story",
+  "description": "Survival scenarios with stick figures",
+  "colors": {
+    "background": "#ffffff",
+    "accent": "#000000",
+    "text": "#000000",
+    "caption_highlight": "#FF0000"
+  },
+  "fonts": {
+    "title_size": 80,
+    "caption_size": 60,
+    "font_family": "Arial-Bold"
+  },
+  "pacing": {
+    "cuts_per_minute": 28,
+    "zoom_intensity": 1.2,
+    "transition": "cut"
+  },
+  "caption_style": {
+    "position": "bottom",
+    "highlight_color": "#FF0000",
+    "outline": true,
+    "outline_color": "#ffffff"
+  },
+  "sfx_profile": "comedy",
+  "voice": "am_michael",
+  "voice_speed": 1.1
+}

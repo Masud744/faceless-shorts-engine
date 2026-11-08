@@ -1,0 +1,29 @@
+{
+  "name": "Tall Tale 3D",
+  "description": "Funny true stories, crazy loopholes, heists, weird history",
+  "colors": {
+    "background": "#1a1a2e",
+    "accent": "#e94560",
+    "text": "#ffffff",
+    "caption_highlight": "#FFD700"
+  },
+  "fonts": {
+    "title_size": 80,
+    "caption_size": 60,
+    "font_family": "Arial-Bold"
+  },
+  "pacing": {
+    "cuts_per_minute": 30,
+    "zoom_intensity": 1.3,
+    "transition": "fade"
+  },
+  "caption_style": {
+    "position": "bottom",
+    "highlight_color": "#FFD700",
+    "outline": true,
+    "outline_color": "#000000"
+  },
+  "sfx_profile": "comedy",
+  "voice": "am_michael",
+  "voice_speed": 1.05
+}

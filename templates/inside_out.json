@@ -1,0 +1,29 @@
+{
+  "name": "Inside Out",
+  "description": "Clean 2D science and health explainers",
+  "colors": {
+    "background": "#f0f4f8",
+    "accent": "#2d6a4f",
+    "text": "#1a1a1a",
+    "caption_highlight": "#FF6B35"
+  },
+  "fonts": {
+    "title_size": 80,
+    "caption_size": 60,
+    "font_family": "Arial-Bold"
+  },
+  "pacing": {
+    "cuts_per_minute": 20,
+    "zoom_intensity": 1.1,
+    "transition": "fade"
+  },
+  "caption_style": {
+    "position": "bottom",
+    "highlight_color": "#FF6B35",
+    "outline": true,
+    "outline_color": "#000000"
+  },
+  "sfx_profile": "subtle",
+  "voice": "af_heart",
+  "voice_speed": 1.0
+}

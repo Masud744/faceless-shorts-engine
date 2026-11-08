@@ -1,0 +1,73 @@
+{
+ "duration": 34.889,
+ "voice": "am_michael",
+ "speed": 1.0,
+ "lines": [
+  {
+   "i": 0,
+   "text": "What happens if you swallow your gum?",
+   "start": 0.35,
+   "end": 2.271
+  },
+  {
+   "i": 1,
+   "text": "Well, it slides down your throat and lands right in your stomach,",
+   "start": 2.551,
+   "end": 5.831
+  },
+  {
+   "i": 2,
+   "text": "where strong acid gets to work on it.",
+   "start": 6.391,
+   "end": 8.54
+  },
+  {
+   "i": 3,
+   "text": "The sugar and flavor dissolve quickly, but the gum base is different.",
+   "start": 8.82,
+   "end": 12.938
+  },
+  {
+   "i": 4,
+   "text": "It's a rubbery polymer, and your body simply can't break it down.",
+   "start": 13.218,
+   "end": 17.093
+  },
+  {
+   "i": 5,
+   "text": "Does it stay there for seven years? No, that's a total myth.",
+   "start": 17.372,
+   "end": 20.945
+  },
+  {
+   "i": 6,
+   "text": "Your gut just keeps pushing it along,",
+   "start": 21.226,
+   "end": 23.175
+  },
+  {
+   "i": 7,
+   "text": "and within a few days, it's out of your system.",
+   "start": 23.686,
+   "end": 25.989
+  },
+  {
+   "i": 8,
+   "text": "But if you swallow a lot of gum all at once,",
+   "start": 26.269,
+   "end": 28.739
+  },
+  {
+   "i": 9,
+   "text": "it can clump together and actually block your gut.",
+   "start": 29.139,
+   "end": 31.831
+  },
+  {
+   "i": 10,
+   "text": "So maybe, just spit it out.",
+   "start": 32.111,
+   "end": 33.69
+  }
+ ]
+}

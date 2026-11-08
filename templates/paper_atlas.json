@@ -1,0 +1,29 @@
+{
+  "name": "Paper Atlas",
+  "description": "Historic battles, empires, voyages on paper maps",
+  "colors": {
+    "background": "#f5e6c8",
+    "accent": "#8B4513",
+    "text": "#2c1810",
+    "caption_highlight": "#DAA520"
+  },
+  "fonts": {
+    "title_size": 80,
+    "caption_size": 60,
+    "font_family": "Arial-Bold"
+  },
+  "pacing": {
+    "cuts_per_minute": 20,
+    "zoom_intensity": 1.1,
+    "transition": "fade"
+  },
+  "caption_style": {
+    "position": "bottom",
+    "highlight_color": "#DAA520",
+    "outline": true,
+    "outline_color": "#000000"
+  },
+  "sfx_profile": "dramatic",
+  "voice": "bf_emma",
+  "voice_speed": 0.95
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Night File 3D",
+  "description": "Dark mysteries, crime, spooky history",
+  "colors": {
+    "background": "#0a0a0a",
+    "accent": "#8b0000",
+    "text": "#c0c0c0",
+    "caption_highlight": "#FF4444"
+  },
+  "fonts": {
+    "title_size": 80,
+    "caption_size": 60,
+    "font_family": "Arial-Bold"
+  },
+  "pacing": {
+    "cuts_per_minute": 22,
+    "zoom_intensity": 1.15,
+    "transition": "fade"
+  },
+  "caption_style": {
+    "position": "bottom",
+    "highlight_color": "#FF4444",
+    "outline": true,
+    "outline_color": "#000000"
+  },
+  "sfx_profile": "eerie",
+  "voice": "am_michael",
+  "voice_speed": 0.95
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Deep Dive 3D",
+  "description": "Zack D. Films style science/body explainers",
+  "colors": {
+    "background": "#0d1117",
+    "accent": "#58a6ff",
+    "text": "#ffffff",
+    "caption_highlight": "#00FF88"
+  },
+  "fonts": {
+    "title_size": 80,
+    "caption_size": 60,
+    "font_family": "Arial-Bold"
+  },
+  "pacing": {
+    "cuts_per_minute": 25,
+    "zoom_intensity": 1.2,
+    "transition": "fade"
+  },
+  "caption_style": {
+    "position": "bottom",
+    "highlight_color": "#00FF88",
+    "outline": true,
+    "outline_color": "#000000"
+  },
+  "sfx_profile": "dramatic",
+  "voice": "am_michael",
+  "voice_speed": 1.0
+}

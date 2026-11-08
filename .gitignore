@@ -1,0 +1,32 @@
+# Virtual Environment
+venv/
+env/
+ENV/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# OS Specific
+.DS_Store
+Thumbs.db
+
+# Chrome & Captures
+/tmp/fs-chrome*
+DevToolsActivePort
+
+# Temporary Projects and Reviews
+projects/*/review/
+projects/breath-test/
+
+# Models and Large Binary Weights
+*.onnx
+*.bin
+*.tar.gz
+.faceless-shorts/
+
+# Retain demo assets
+!assets/demo/*
