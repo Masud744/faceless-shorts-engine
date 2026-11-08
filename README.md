@@ -1,14 +1,14 @@
 # Faceless Shorts Engine — Automated 3D Animated Vertical Video Generator
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Node.js-22+-339933?style=flat-square&logo=node.js&logoColor=white" alt="Node.js">
-  <img src="https://img.shields.io/badge/Three.js-r160+-black?style=flat-square&logo=three.js&logoColor=white" alt="Three.js">
-  <img src="https://img.shields.io/badge/Python-3.10--3.14-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Node.js-22+-339933?style=flat-square&logo=nodedotjs&logoColor=white" alt="Node.js">
+  <img src="https://img.shields.io/badge/Three.js-r160-black?style=flat-square&logo=threedotjs&logoColor=white" alt="Three.js">
+  <img src="https://img.shields.io/badge/Python-3.10_--_3.14-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python">
   <img src="https://img.shields.io/badge/Kokoro-82M_ONNX-8E75C2?style=flat-square" alt="Kokoro ONNX">
-  <img src="https://img.shields.io/badge/Whisper-Word_Alignment-00A67E?style=flat-square&logo=openai&logoColor=white" alt="Whisper">
-  <img src="https://img.shields.io/badge/FFmpeg-Hardware_Mux-007808?style=flat-square&logo=ffmpeg&logoColor=white" alt="FFmpeg">
-  <img src="https://img.shields.io/badge/Chrome-DevTools_Protocol-4285F4?style=flat-square&logo=googlechrome&logoColor=white" alt="Chrome DevTools Protocol">
-  <img src="https://img.shields.io/badge/Cost-%240.00_Local-brightgreen?style=flat-square" alt="Zero Cost">
+  <img src="https://img.shields.io/badge/Whisper-Timestamped-00A67E?style=flat-square" alt="Whisper">
+  <img src="https://img.shields.io/badge/FFmpeg-Audio%2FVideo-007808?style=flat-square&logo=ffmpeg&logoColor=white" alt="FFmpeg">
+  <img src="https://img.shields.io/badge/Chrome-Headless_CDP-4285F4?style=flat-square&logo=google-chrome&logoColor=white" alt="Chrome">
+  <img src="https://img.shields.io/badge/Cost-Free_Open_Source-brightgreen?style=flat-square" alt="Zero Cost">
   <img src="https://img.shields.io/badge/License-MIT-4CAF50?style=flat-square" alt="License">
 </p>
 
@@ -131,11 +131,12 @@ The engine includes templates and asset libraries across six vertical video genr
 ```text
 faceless-shorts-engine/
 ├── assets/
-│   └── demo/                         # Preview frames and contact sheets
-│       ├── gum_review_sheet.jpg
-│       ├── thumb_block.jpg
-│       ├── thumb_hook.jpg
-│       └── thumb_xray.jpg
+│   └── demo/                         # Preview frames, GIF, and contact sheets
+│       ├── demo_preview.gif          # Looping animated preview
+│       ├── gum_review_sheet.jpg      # 11-shot master contact sheet
+│       ├── thumb_block.jpg           # Gut blockage warning screenshot
+│       ├── thumb_hook.jpg            # Kitchen character screenshot
+│       └── thumb_xray.jpg            # Esophagus & stomach screenshot
 ├── faceless-shorts/                  # Core skill templates and automation
 │   ├── scripts/
 │   │   ├── new_video.sh              # Project scaffold script
@@ -161,8 +162,6 @@ faceless-shorts-engine/
 │       ├── fonts/                    # Embedded typography (Inter Black/ExtraBold)
 │       ├── renders/
 │       │   └── swallow_gum.mp4       # Master exported 1080x1920 video
-│       ├── review/
-│       │   └── all.jpg               # Multi-shot visual QA contact sheet
 │       ├── src/
 │       │   ├── core/                 # Three.js runtime, lighting, captions
 │       │   ├── main.js               # Capture entrypoint and OP interface
@@ -172,6 +171,7 @@ faceless-shorts-engine/
 │       │   └── mix.py                # Procedural audio and sound design mixer
 │       ├── index.html                # Three.js canvas host page
 │       └── script.json               # Video narrative script and citations
+├── generate.sh                       # 1-click full pipeline runner script
 ├── .gitignore
 └── README.md
 ```
@@ -259,14 +259,22 @@ curl -L -o ~/.faceless-shorts/kokoro/voices-v1.0.bin \
 
 ## How to Generate a Video
 
-### Step 1: Scaffold a New Project
-Create a new project workspace using any of the available styles:
+### Method A: 1-Click Automation (Recommended)
+You can generate a complete video with a single command using `generate.sh`:
+```bash
+chmod +x generate.sh
+./generate.sh deep-dive swallow-gum
+```
+
+### Method B: Step-by-Step Manual Workflow
+
+#### Step 1: Scaffold a New Project
 ```bash
 bash faceless-shorts/scripts/new_video.sh deep-dive projects/my-video
 cd projects/my-video
 ```
 
-### Step 2: Write the Script (`script.json`)
+#### Step 2: Write the Script (`script.json`)
 Edit `script.json` with your narrative sentences, hook, and citations:
 ```json
 {
@@ -283,7 +291,7 @@ Edit `script.json` with your narrative sentences, hook, and citations:
 }
 ```
 
-### Step 3: Synthesize Narration Audio
+#### Step 3: Synthesize Narration Audio
 Run the neural voice synthesizer:
 ```bash
 python ../../faceless-shorts/scripts/voice.py .
@@ -292,14 +300,14 @@ This generates:
 - `data/narration.wav`: Studio quality voice track.
 - `data/lines.json`: Accurate start and end timestamps for every sentence.
 
-### Step 4: Generate Word-Level Subtitles
+#### Step 4: Generate Word-Level Subtitles
 Run Whisper alignment:
 ```bash
 python ../../faceless-shorts/scripts/words.py .
 ```
 This aligns every spoken word to exact millisecond intervals in `data/words.json`.
 
-### Step 5: Extract Cues and Synthesize Audio Mix
+#### Step 5: Extract Cues and Synthesize Audio Mix
 Extract sound markers from the 3D scene and synthesize the procedural soundtrack:
 ```bash
 node tools/capture.mjs cues
@@ -307,13 +315,13 @@ python tools/mix.py .
 ```
 This produces `data/mix.wav` containing sound effects and music ducked under the voiceover.
 
-### Step 6: Render QA Contact Sheet
+#### Step 6: Render QA Contact Sheet
 Generate a quick multi-frame preview to verify visual composition before full rendering:
 ```bash
 node tools/capture.mjs sheet review/all.jpg 3 4
 ```
 
-### Step 7: Render the Final Video
+#### Step 7: Render the Final Video
 Export the complete 1080x1920 MP4 video:
 ```bash
 # Standard rendering
@@ -333,12 +341,28 @@ A complete demonstration project is included in `projects/swallow-gum/`.
 | :--- | :--- | :--- | :--- | :--- |
 | `projects/swallow-gum/renders/swallow_gum.mp4` | 1080 x 1920 (9:16) | 34.88 seconds | 24 FPS (837 frames) | 17 MB |
 
-### Rendered Frame Previews
+### Playable Video Preview
 
 <p align="center">
-  <img src="assets/demo/thumb_xray.jpg" width="30%" alt="X-Ray Esophagus">
-  <img src="assets/demo/thumb_block.jpg" width="30%" alt="Gut Blockage Warning">
-  <img src="assets/demo/thumb_hook.jpg" width="30%" alt="Kitchen Hook">
+  <video src="projects/swallow-gum/renders/swallow_gum.mp4" controls="controls" width="340" poster="assets/demo/thumb_xray.jpg">
+    <a href="projects/swallow-gum/renders/swallow_gum.mp4">
+      <img src="assets/demo/demo_preview.gif" width="340" alt="Click to Watch Short Video">
+    </a>
+  </video>
+  <br>
+  <a href="projects/swallow-gum/renders/swallow_gum.mp4">
+    <img src="assets/demo/demo_preview.gif" width="340" alt="Click to Watch Short Video">
+  </a>
+  <br>
+  <em>Video Link: <a href="projects/swallow-gum/renders/swallow_gum.mp4">projects/swallow-gum/renders/swallow_gum.mp4</a> (Click to open or download full 1080x1920 MP4 with audio)</em>
+</p>
+
+### Key Frame Screenshots
+
+<p align="center">
+  <img src="assets/demo/thumb_xray.jpg" width="30%" alt="X-Ray Esophagus and Stomach">
+  <img src="assets/demo/thumb_block.jpg" width="30%" alt="Gut Blockage Red Alert">
+  <img src="assets/demo/thumb_hook.jpg" width="30%" alt="Kitchen Character Hook">
 </p>
 
 ### 11-Shot Contact Sheet Breakdown
@@ -419,6 +443,12 @@ If Whisper aligns words too early or overlaps pauses, ensure `vad_filter=False` 
 ## Author
 
 **Shahriar Alom Masud**  
+B.Sc. Engg. in IoT & Robotics Engineering  
+University of Frontier Technology, Bangladesh  
+
+- Institutional Email: [shahriar0002@std.uftb.ac.bd](mailto:shahriar0002@std.uftb.ac.bd)  
+- Personal Email: [masud.nil74@gmail.com](mailto:masud.nil74@gmail.com)  
+- LinkedIn: [https://www.linkedin.com/in/shahriar-alom-masud](https://www.linkedin.com/in/shahriar-alom-masud)  
 - GitHub: [@Masud744](https://github.com/Masud744)
 
 ---
