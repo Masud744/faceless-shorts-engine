@@ -19,6 +19,15 @@ from scipy.io import wavfile
 P = Path(sys.argv[1] if len(sys.argv) > 1 else '.')
 SR = 48000
 rng = np.random.default_rng(11)
+def find_repo_root(start: Path) -> Path:
+    cur = start.resolve()
+    for p in [cur] + list(cur.parents):
+        if (p / 'assets' / 'audio').exists() or (p / '.git').exists():
+            return p
+    return cur.parent
+
+REPO_ROOT = find_repo_root(Path(__file__))
+
 cj = json.loads((P / 'data/cues.json').read_text())
 script = json.loads((P / 'script.json').read_text())
 DUR = float(cj['duration'])
@@ -93,10 +102,15 @@ def heartbeat(**_):
     one = lambda d, f: np.sin(2 * np.pi * f * tt(d)) * env(int(d * SR), 0.004, 7)
     x = np.concatenate([one(0.16, 58), np.zeros(int(0.09 * SR)), one(0.2, 52) * 0.75]); return lp(x, 300) * 1.0
 
+def ding(**_):
+    t = tt(1.4); x = sum(np.sin(2 * np.pi * f * t) * g for f, g in [(1318, 1), (2637, 0.35), (3951, 0.12)]) * env(len(t), 0.002, 4); return x * 0.5
+def impact(**_):
+    t = tt(0.45); x = np.sin(2 * np.pi * 65 * t) * env(len(t), 0.002, 8) + bp(noise(0.45), 400, 2800) * env(len(t), 0.003, 10) * 0.5; return lp(x, 1500) * 0.8
+
 FX = dict(inhale=inhale, heartbeat=heartbeat, whoosh=whoosh, slide=slide, pop=pop, plop=plop, gulp=gulp, boing=boing, bubbles=bubbles, sizzle=sizzle,
-          sparkle=sparkle, thud=thud, slam=slam, tock=tock, zip=zip_, alarm=alarm)
+          sparkle=sparkle, thud=thud, slam=slam, tock=tock, zip=zip_, alarm=alarm, ding=ding, impact=impact)
 LEVEL = dict(inhale=-15, heartbeat=-8, whoosh=-17, slide=-19, pop=-14, plop=-15, gulp=-11, boing=-15, bubbles=-21, sizzle=-18, sparkle=-17,
-             thud=-11, slam=-9, tock=-18, zip=-14, alarm=-17)
+             thud=-11, slam=-9, tock=-18, zip=-14, alarm=-17, ding=-17, impact=-11)
 
 
 # ---------- the music bed: soft pad + plucked arpeggio, 100 BPM, I–vi–IV–V ----------
@@ -149,20 +163,49 @@ if vf.exists():
 # music
 mus = script.get('music', 'bed')
 if mus and mus != 'none':
-    m = music_bed() if mus == 'bed' else music_tension() if mus == 'tension' else None
-    if m is None:
-        a = load_audio(P / mus)[:N]; m = np.zeros(N); m[:len(a)] = a.mean(1); m /= np.abs(m).max() + 1e-9
-    m = np.stack([m, m], 1) * db(-24 if voice is not None else -20)
-    if voice is not None:                                                        # duck under the voice
-        lev = np.abs(voice.mean(1)); lev = signal.lfilter([1 - 0.9995], [1, -0.9995], lev); lev /= lev.max() + 1e-9
-        m *= (1 - 0.55 * np.clip(lev * 3, 0, 1))[:, None]
-    mix += m
+    m = None
+    # Check for studio BGM asset
+    repo_root = REPO_ROOT
+    studio_bgm = repo_root / 'assets' / 'audio' / 'bgm' / f'{mus}.wav'
+    custom_bgm = P / mus
+    if studio_bgm.exists():
+        a = load_audio(studio_bgm)
+        if len(a) < N:
+            reps = int(np.ceil(N / len(a)))
+            a = np.tile(a, (reps, 1))
+        m = a[:N].mean(1)
+        m /= np.abs(m).max() + 1e-9
+    elif custom_bgm.exists():
+        a = load_audio(custom_bgm)
+        if len(a) < N:
+            reps = int(np.ceil(N / len(a)))
+            a = np.tile(a, (reps, 1))
+        m = a[:N].mean(1)
+        m /= np.abs(m).max() + 1e-9
+    elif mus == 'bed':
+        m = music_bed()
+    elif mus == 'tension':
+        m = music_tension()
+
+    if m is not None:
+        m = np.stack([m, m], 1) * db(-24 if voice is not None else -20)
+        if voice is not None:                                                        # duck under the voice
+            lev = np.abs(voice.mean(1)); lev = signal.lfilter([1 - 0.9995], [1, -0.9995], lev); lev /= lev.max() + 1e-9
+            m *= (1 - 0.55 * np.clip(lev * 3, 0, 1))[:, None]
+        mix += m
 # effects
 for c in cj['cues']:
-    fn = FX.get(c['type'])
-    if not fn: print('unknown cue type, skipped:', c['type']); continue
-    x = fn(**({'d': c['dur']} if c.get('dur') else {}))
-    x = lp(x, 5000) * db(LEVEL[c['type']]) * c.get('gain', 1.0) / (np.abs(x).max() + 1e-9) * 0.9
+    repo_root = REPO_ROOT
+    studio_sfx = repo_root / 'assets' / 'audio' / 'sfx' / f"{c['type']}.wav"
+    if studio_sfx.exists():
+        s_audio = load_audio(studio_sfx)
+        x = s_audio.mean(1) if s_audio.ndim == 2 else s_audio
+        x = x / (np.abs(x).max() + 1e-9) * 0.9
+    else:
+        fn = FX.get(c['type'])
+        if not fn: print('unknown cue type, skipped:', c['type']); continue
+        x = fn(**({'d': c['dur']} if c.get('dur') else {}))
+        x = lp(x, 5000) * db(LEVEL.get(c['type'], -14)) * c.get('gain', 1.0) / (np.abs(x).max() + 1e-9) * 0.9
     i = int(c['t'] * SR); n = min(len(x), N - i)
     if n > 0 and i >= 0: pan = c.get('pan', 0.0); mix[i:i + n, 0] += x[:n] * (1 - max(0, pan)); mix[i:i + n, 1] += x[:n] * (1 + min(0, pan))
 # master: gentle soft-clip, peak -1 dBFS

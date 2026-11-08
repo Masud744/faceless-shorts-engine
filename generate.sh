@@ -74,6 +74,10 @@ python "$ROOT_DIR/faceless-shorts/scripts/voice.py" "$PROJECT_DIR"
 echo "[3/6] Aligning word timestamps with faster-whisper..."
 python "$ROOT_DIR/faceless-shorts/scripts/words.py" "$PROJECT_DIR"
 
+# Step 3.5: Dynamic 3D Scene Mapping Engine
+echo "[3.5/6] Dynamically mapping script lines to 3D scenes & shots..."
+python "$ROOT_DIR/engine/scene_mapper.py" "$PROJECT_DIR" --style "$STYLE"
+
 # Step 4: Extract sound markers and mix audio
 echo "[4/6] Extracting cues and generating procedural audio mix..."
 cd "$PROJECT_DIR"
