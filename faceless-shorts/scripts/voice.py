@@ -67,17 +67,44 @@ def main():
     ap.add_argument('--voice'); ap.add_argument('--speed', type=float)
     a = ap.parse_args()
     if a.list:
+        print("--- Kokoro Offline Voices (English) ---")
         for k, v in GOOD.items(): print(f'{k:12s} {v}')
+        print("\n--- Edge-TTS Multilingual & Bengali Voices ---")
+        print(f'{"bn-BD-PradeepNeural":25s} Bengali male (BD)')
+        print(f'{"bn-BD-NabanitaNeural":25s} Bengali female (BD)')
+        print(f'{"bn-IN-BashkarNeural":25s} Bengali male (IN)')
+        print(f'{"bn-IN-TanishaaNeural":25s} Bengali female (IN)')
         return
-    ensure_models()
-    if a.download: return
+    if a.download:
+        ensure_models()
+        return
     if not a.project: ap.error('project folder missing')
-    from kokoro_onnx import Kokoro
     P = Path(a.project); S = json.loads((P / 'script.json').read_text())
     voice = a.voice or S.get('voice', 'am_michael'); speed = a.speed or S.get('speed', 1.0)
-    k = Kokoro(str(KDIR / 'kokoro-v1.0.onnx'), str(KDIR / 'voices-v1.0.bin'))
-    lang = 'en-gb' if voice.startswith('b') else 'en-us'
-    say = lambda text: trim(np.asarray(k.create(text, voice=voice, speed=speed, lang=lang)[0], dtype=np.float64))
+    
+    is_edge = 'Neural' in voice or voice.startswith('bn-') or voice.startswith('en-')
+    if is_edge:
+        import asyncio, edge_tts, tempfile, subprocess
+        def say(text):
+            with tempfile.NamedTemporaryFile(suffix='.mp3', delete=False) as f: mp3_p = f.name
+            with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as f: wav_p = f.name
+            try:
+                rate_str = f"{int((speed - 1.0) * 100):+d}%" if speed != 1.0 else "+0%"
+                asyncio.run(edge_tts.Communicate(text, voice, rate=rate_str).save(mp3_p))
+                subprocess.run(["ffmpeg", "-y", "-i", mp3_p, "-ar", str(SR), "-ac", "1", wav_p],
+                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+                _, data = wavfile.read(wav_p)
+                arr = data.astype(np.float64) / 32768.0 if data.dtype == np.int16 else data.astype(np.float64)
+                return trim(arr)
+            finally:
+                if os.path.exists(mp3_p): os.unlink(mp3_p)
+                if os.path.exists(wav_p): os.unlink(wav_p)
+    else:
+        ensure_models()
+        from kokoro_onnx import Kokoro
+        k = Kokoro(str(KDIR / 'kokoro-v1.0.onnx'), str(KDIR / 'voices-v1.0.bin'))
+        lang = 'en-gb' if voice.startswith('b') else 'en-us'
+        say = lambda text: trim(np.asarray(k.create(text, voice=voice, speed=speed, lang=lang)[0], dtype=np.float64))
     # group the lines into whole sentences (a line ending in . ? ! closes one; "break": true forces a close)
     groups, cur = [], []
     for i, ln in enumerate(S['lines']):

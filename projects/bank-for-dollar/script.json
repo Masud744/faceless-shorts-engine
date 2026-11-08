@@ -1,5 +1,5 @@
 {
-  "title": "The Girl Who Was Mailed To Grandma",
+  "title": "The Man Who Bought An Entire Bank For $1",
   "voice": "am_michael",
   "speed": 1.05,
   "lead": 0.3,
@@ -7,31 +7,25 @@
   "gap": 0.18,
   "music": "bounce",
   "sources": [
-    "History.com, 'When Americans Mailed Their Children' (parcel post began January 1, 1913; in February 1914 May Pierstorff, nearly six, was mailed 73 miles from Grangeville to her grandparents in Lewiston, Idaho, for 53 cents in stamps attached to her coat; a relative who was a postal worker took her on a Railway Mail train; the Postmaster General then banned accepting people as mail)",
-    "Wikipedia, 'Charlotte May Pierstorff' (48.5 pounds; rode in the mail car with Leonard Mochel, her mother's cousin, a railway postal clerk, who delivered her to her grandmother; the case led to rules against mailing people; day-old poultry stayed mailable)",
-    "USPS Publication 52 / DMM 526: day-old poultry (live baby chicks) can still be mailed today",
-    "Parcel post weight limit was raised to 50 pounds for the first and second zones on January 1, 1914"
+    "BBC News, '1995: Barings Bank collapses' (Barings Bank, founded in 1762, collapsed after Nick Leeson lost 827 million pounds)",
+    "The Guardian, 'Dutch bank buys Barings for 1 pound' (ING Group bought Barings Bank on March 6, 1995 for a nominal sum of 1 pound while assuming its liabilities)",
+    "The New York Times, 'Barings Sold for One Pound to Dutch Giant'"
   ],
   "lines": [
-    { "text": "In 1914, a couple in Idaho mailed their five year old daughter", "caps": "In 1914, | a couple | in Idaho | mailed | their | five year old | daughter" },
-    { "text": "to her grandma's house." },
-    { "text": "With the stamps stuck right on her coat." },
-    { "text": "See, the post office had just started delivering packages," },
-    { "text": "and May's parents wanted her to visit grandma," },
-    { "text": "seventy-three miles away.", "caps": "73 miles | away." },
-    { "text": "But a train ticket wasn't cheap." },
-    { "text": "So her dad walked her into the post office" },
-    { "text": "and asked how much it costs to mail a kid." },
-    { "text": "The clerk checked the rules," },
-    { "text": "and nothing said he couldn't." },
-    { "text": "May weighed forty-eight and a half pounds,", "caps": "May | weighed | 48 and a half | pounds," },
-    { "text": "just under the fifty pound limit.", "caps": "just | under | the 50 pound | limit." },
-    { "text": "So on went fifty-three cents in stamps,", "caps": "So on | went | 53 cents | in stamps," },
-    { "text": "and she rode the train in the mail car," },
-    { "text": "with her mom's cousin, who happened to be the mail clerk." },
-    { "text": "He walked her right up to grandma's front door." },
-    { "text": "Soon after, the post office banned mailing people." },
-    { "text": "Which is why today, you can still mail baby chicks," },
-    { "text": "but not your little sister.", "gap": 0.3 }
+    { "text": "In 1995, a man bought an entire two hundred year old bank", "caps": "In 1995, | a man bought | an entire | 200 year old | bank" },
+    { "text": "for literally one single dollar.", "caps": "for literally | one single | dollar." },
+    { "text": "And the government let him do it." },
+    { "text": "See, Barings Bank was one of the most prestigious banks on Earth," },
+    { "text": "managing money for the Queen of England." },
+    { "text": "Until one rogue trader in Singapore" },
+    { "text": "secretly gambled away eight hundred million pounds.", "caps": "secretly | gambled away | 800 million | pounds." },
+    { "text": "The entire bank went bankrupt overnight." },
+    { "text": "Panicked officials desperately looked for a buyer," },
+    { "text": "but nobody wanted an eight hundred million dollar debt." },
+    { "text": "Until a clever Dutch banker stepped up," },
+    { "text": "handed over a single one-dollar coin,", "caps": "handed over | a single | one-dollar coin," },
+    { "text": "and walked away owning the entire worldwide empire." },
+    { "text": "Which proves that with enough debt," },
+    { "text": "even a royal bank costs less than a cup of coffee.", "gap": 0.3 }
   ]
 }

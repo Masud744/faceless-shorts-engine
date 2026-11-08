@@ -30,3 +30,12 @@ projects/breath-test/
 
 # Retain demo assets
 !assets/demo/*
+
+# Secrets and Environment Variables
+.env
+.env.*
+
+# Temporary Audio Previews
+studio/static/previews/
+
+
