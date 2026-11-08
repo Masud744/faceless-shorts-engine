@@ -311,3 +311,4 @@ def build_all_assets():
 
 if __name__ == "__main__":
     build_all_assets()
+

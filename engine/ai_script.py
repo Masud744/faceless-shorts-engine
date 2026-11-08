@@ -142,6 +142,7 @@ def generate_script(
                 # Ensure required fields exist
                 script_json["style"] = style
                 script_json["voice"] = voice
+                script_json["lang"] = language
                 script_json["music"] = script_json.get("music", music)
                 script_json.setdefault("speed", 1.0)
                 script_json.setdefault("lead", 0.35)

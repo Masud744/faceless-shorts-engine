@@ -14,7 +14,7 @@ import argparse, json, re, subprocess
 from difflib import SequenceMatcher
 from pathlib import Path
 
-norm = lambda w: re.sub(r'[^a-z0-9]+', '', w.lower())
+norm = lambda w: re.sub(r'[\s\.,?!:;\'"|*()—–_`~@#$%^&+=<>{}\[\]\/\\]+', '', w.lower())
 
 
 def align(script_words, heard, t0, t1):
@@ -41,12 +41,13 @@ def inline_fallback(P, S):
     L = json.loads((P / 'data/lines.json').read_text())['lines']; words = []
     for i, ln in enumerate(S['lines']):
         toks = [w for w in ln['text'].split() if norm(w)]
-        wts = [len(norm(w)) + 2.5 + (2.5 if w.endswith(',') else 4.5 if re.search(r'[.?!]$', w) and k < len(toks) - 1 else 0) for k, w in enumerate(toks)]
+        wts = [len(norm(w)) + 2.5 + (2.5 if w.endswith(',') else 4.5 if re.search(r'[.?!।]$', w) and k < len(toks) - 1 else 0) for k, w in enumerate(toks)]
         lo, hi = L[i]['start'], L[i]['end']; c = lo; tot = sum(wts)
+        if tot <= 0: continue
         for w, wt in zip(toks, wts):
             d = (hi - lo) * wt / tot; speak = d - (hi - lo) * (wt - len(norm(w)) - 2.5) / tot
             words.append({'w': w, 'line': i, 's': round(c, 3), 'e': round(c + speak * 0.92, 3)}); c += d
-    (P / 'data/words.json').write_text(json.dumps(words, indent=1))
+    (P / 'data/words.json').write_text(json.dumps(words, indent=1, ensure_ascii=False))
     (P / 'data/words.txt').write_text('\n'.join(f"{w['s']:7.2f} {w['e']:7.2f}  L{w['line']:<2d} {w['w']}" for w in words))
     print(f'data/words.json: {len(words)} words (spread inside the voice line times)')
 
@@ -54,6 +55,11 @@ def inline_fallback(P, S):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument('project'); ap.add_argument('--audio'); a = ap.parse_args()
     P = Path(a.project); S = json.loads((P / 'script.json').read_text())
+    
+    is_non_english = S.get('lang') in ('bn', 'bangla') or any(ord(c) > 127 for c in ''.join(ln.get('text', '') for ln in S.get('lines', [])))
+    if is_non_english and not a.audio and (P / 'data/lines.json').exists():
+        print('Bengali / non-English script detected: aligning word timings from exact neural line bounds...')
+        return inline_fallback(P, S)
     try:
         from faster_whisper import WhisperModel
         model = WhisperModel('small.en', device='cpu', compute_type='int8')

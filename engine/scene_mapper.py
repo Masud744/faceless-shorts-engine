@@ -40,7 +40,7 @@ def detect_scene_beat(text: str, index: int, total: int) -> Dict[str, Any]:
             "hud": "TAKEAWAY_PILL",
             "sfx": ["ding", "whoosh"],
         }
-    elif any(w in t for w in ["blood", "vessel", "cell", "flow", "oxygen", "heart", "vein"]):
+    elif any(w in t for w in ["blood", "vessel", "cell", "flow", "oxygen", "heart", "vein", "রক্ত", "কোষ", "শিরা", "অক্সিজেন", "ধমনী"]):
         return {
             "type": "vessel",
             "note": "microscopic vessel: red blood cells flowing through vascular tunnel",
@@ -48,7 +48,7 @@ def detect_scene_beat(text: str, index: int, total: int) -> Dict[str, Any]:
             "hud": "VESSEL_LABEL",
             "sfx": ["sparkle", "tock"],
         }
-    elif any(w in t for w in ["acid", "bubble", "melt", "dissolve", "burn", "digest", "stomach"]):
+    elif any(w in t for w in ["acid", "bubble", "melt", "dissolve", "burn", "digest", "stomach", "পেট", "পাকস্থলী", "হজম", "এসিড", "পানি", "চা", "ঠান্ডা"]):
         return {
             "type": "stomach",
             "note": "macro stomach closeup: acidic reaction and churning motion",
@@ -56,7 +56,7 @@ def detect_scene_beat(text: str, index: int, total: int) -> Dict[str, Any]:
             "hud": "ACID_LABEL",
             "sfx": ["bubbles", "sizzle"],
         }
-    elif any(w in t for w in ["block", "clump", "danger", "warning", "fatal", "harm", "trap", "stuck"]):
+    elif any(w in t for w in ["block", "clump", "danger", "warning", "fatal", "harm", "trap", "stuck", "বিপদ", "ঝুঁকি", "ক্ষতি", "আটকে", "সতর্ক", "ভুল"]):
         return {
             "type": "warning",
             "note": "x-ray red warning: blockage alert and flashing red silhouette",
@@ -64,7 +64,7 @@ def detect_scene_beat(text: str, index: int, total: int) -> Dict[str, Any]:
             "hud": "RED_ALERT",
             "sfx": ["alarm", "impact"],
         }
-    elif any(w in t for w in ["throat", "swallow", "slide", "down", "travel", "esophagus", "inside"]):
+    elif any(w in t for w in ["throat", "swallow", "slide", "down", "travel", "esophagus", "inside", "গলা", "গিলে", "খাদ্যনালী", "ভেতরে", "নেমে"]):
         return {
             "type": "esophagus",
             "note": "x-ray descent: object slides down the esophagus into torso",

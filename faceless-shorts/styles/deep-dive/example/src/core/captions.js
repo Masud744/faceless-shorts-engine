@@ -9,9 +9,9 @@ export const CAP = { y: 1480, size: 118, maxW: 940 };
 let caps = [];
 
 function autoChunks(text) {
-  const ws = text.toUpperCase().split(/\s+/).filter(Boolean), out = [];
+  const ws = text.split(/\s+/).filter(Boolean), out = [];
   for (let i = 0; i < ws.length;) { const n = ws.length - i === 4 ? 2 : Math.min(3, ws.length - i); out.push(ws.slice(i, i + n)); i += n; }
-  return out.map((c) => { const k = c.reduce((b, w, j) => (w.replace(/[^A-Z]/g, '').length > c[b].replace(/[^A-Z]/g, '').length ? j : b), 0); return c.map((w, j) => (j === k ? '*' + w : w)).join(' '); });
+  return out.map((c) => { const k = c.reduce((b, w, j) => (w.length > c[b].length ? j : b), 0); return c.map((w, j) => (j === k ? '*' + w : w)).join(' '); });
 }
 
 export function buildCaptions(script) {
@@ -20,7 +20,7 @@ export function buildCaptions(script) {
     const chunks = (ln.caps ? ln.caps.split('|') : autoChunks(ln.text)).map((s) => s.trim()).filter(Boolean);
     const ws = lineWords(i); if (!ws.length) return;
     const counts = chunks.map((c) => c.split(/\s+/).length), N = counts.reduce((a, b) => a + b, 0);
-    const nm = (w) => String(w).toLowerCase().replace(/[^a-z0-9']+/g, '');
+    const nm = (w) => String(w).toLowerCase().replace(/[\s\.,?!:;'"|*()—–_`~@#$%^&+=<>{}\[\]\/\\]+/g, '');
     let acc = 0, from = 0;
     chunks.forEach((c, j) => {
       // find the chunk's first word in the spoken line (from where the last chunk started); else place it by word count
@@ -42,7 +42,7 @@ export const captionList = () => caps;
 export function drawCaption(t) {
   const c = caps.find((c) => t >= c.s && t < c.e); if (!c) return;
   const lt = t - c.s, size = CAP.size;
-  ctx.font = `900 ${size}px Inter`; ctx.letterSpacing = '-1px';
+  ctx.font = `900 ${size}px "Noto Sans Bengali", Inter, sans-serif`; ctx.letterSpacing = '-1px';
   const sp = size * 0.26;
   c.words.forEach((w) => (w.w = ctx.measureText(w.txt).width));
   const width = (ws) => ws.reduce((a, w) => a + w.w, 0) + sp * (ws.length - 1);
