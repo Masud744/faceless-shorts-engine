@@ -394,41 +394,41 @@
         <section class="col-span-4 bg-brand-panel border border-brand-border rounded-xl flex flex-col overflow-hidden">
           
           <!-- Header with Quality Dropdown Pill -->
-          <div class="p-3 border-b border-brand-border flex items-center justify-between shrink-0">
+          <div class="p-2.5 px-3 border-b border-brand-border flex items-center justify-between shrink-0">
             <span class="font-bold text-xs text-white flex items-center gap-1.5">
               <i data-lucide="smartphone" class="w-3.5 h-3.5 text-brand-yellow"></i> Preview — 9:16
             </span>
-            <span class="text-[11px] font-mono text-gray-300 bg-brand-card px-2 py-0.5 rounded border border-brand-border font-medium">
+            <span class="text-[10px] font-mono text-gray-300 bg-brand-card px-2 py-0.5 rounded border border-brand-border font-medium">
               Draft (0.7x · 24 FPS) ▾
             </span>
           </div>
 
-          <div class="p-3 flex-1 overflow-y-auto space-y-3">
+          <div class="p-2.5 flex-1 overflow-y-auto space-y-2">
             
-            <!-- 9:16 Vertical Video Viewport with Esophagus/Stomach 3D Visual -->
-            <div class="relative w-full aspect-[9/16] max-h-[310px] mx-auto bg-black rounded-lg overflow-hidden border border-brand-border flex items-center justify-center group shadow-xl">
-              <video id="main-preview-video" poster="/media/assets/demo/thumb_xray.jpg" src="/media/projects/swallow-gum/renders/swallow_gum.mp4" class="w-full h-full object-cover" playsinline loop></video>
+            <!-- 9:16 Vertical Video Viewport (Centered Phone Frame) -->
+            <div class="relative w-[150px] h-[267px] mx-auto bg-black rounded-lg overflow-hidden border border-brand-border flex items-center justify-center group shadow-xl shrink-0">
+              <video id="main-preview-video" poster="/media/assets/demo/thumb_xray.jpg" src="/media/projects/swallow-gum/renders/swallow_gum.mp4" class="w-full h-full object-cover object-top" playsinline loop></video>
               
               <!-- Video Controls Overlay -->
-              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/20 opacity-0 group-hover:opacity-100 transition flex flex-col justify-between p-3">
-                <div class="text-[10px] font-mono text-white/80 flex items-center justify-between">
-                  <span>1080x1920 (9:16)</span>
-                  <span class="bg-black/60 px-1.5 py-0.5 rounded font-bold">Three.js r160</span>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/20 opacity-0 group-hover:opacity-100 transition flex flex-col justify-between p-2">
+                <div class="text-[9px] font-mono text-white/80 flex items-center justify-between">
+                  <span>1080x1920</span>
+                  <span class="bg-black/60 px-1 rounded font-bold">9:16</span>
                 </div>
 
-                <div class="flex flex-col gap-1.5">
+                <div class="flex flex-col gap-1">
                   <input id="video-scrubber" type="range" min="0" max="100" value="0" class="w-full h-1 bg-gray-600 accent-brand-yellow rounded cursor-pointer">
                   
-                  <div class="flex items-center justify-between text-xs text-white">
-                    <div class="flex items-center gap-2">
-                      <button onclick="toggleVideoPlayback()" class="p-1 hover:text-brand-yellow">
-                        <i data-lucide="play" id="vid-play-icon" class="w-4 h-4 fill-white"></i>
+                  <div class="flex items-center justify-between text-[11px] text-white">
+                    <div class="flex items-center gap-1.5">
+                      <button onclick="toggleVideoPlayback()" class="p-0.5 hover:text-brand-yellow">
+                        <i data-lucide="play" id="vid-play-icon" class="w-3.5 h-3.5 fill-white"></i>
                       </button>
-                      <span id="vid-time-display" class="text-[10px] font-mono text-gray-300">0:00 / 0:42</span>
+                      <span id="vid-time-display" class="text-[9px] font-mono text-gray-300">0:00 / 0:42</span>
                     </div>
-                    <div class="flex items-center gap-2">
-                      <button class="p-1 hover:text-brand-yellow"><i data-lucide="volume-2" class="w-3.5 h-3.5"></i></button>
-                      <button onclick="toggleFullscreen()" class="p-1 hover:text-brand-yellow"><i data-lucide="maximize" class="w-3.5 h-3.5"></i></button>
+                    <div class="flex items-center gap-1">
+                      <button class="p-0.5 hover:text-brand-yellow"><i data-lucide="volume-2" class="w-3 h-3"></i></button>
+                      <button onclick="toggleFullscreen()" class="p-0.5 hover:text-brand-yellow"><i data-lucide="maximize" class="w-3 h-3"></i></button>
                     </div>
                   </div>
                 </div>
@@ -436,53 +436,53 @@
             </div>
 
             <!-- Controls Cards -->
-            <div class="space-y-2.5 text-xs">
+            <div class="space-y-2 text-xs">
               
               <!-- Animation Style Card -->
               <div>
-                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Animation Style</label>
-                <div class="bg-brand-card p-2 rounded-lg border border-brand-border flex items-center gap-2.5">
-                  <div class="w-8 h-8 rounded bg-brand-yellow/15 border border-brand-yellow/40 flex items-center justify-center text-brand-yellow shrink-0 font-bold text-xs">
+                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-0.5">Animation Style</label>
+                <div class="bg-brand-card p-2 rounded-lg border border-brand-border flex items-center gap-2">
+                  <div class="w-7 h-7 rounded bg-brand-yellow/15 border border-brand-yellow/40 flex items-center justify-center text-brand-yellow shrink-0 font-bold text-[11px]">
                     3D
                   </div>
                   <div class="flex-1 min-w-0">
-                    <div class="font-bold text-white text-xs">Deep-Dive</div>
-                    <div class="text-[10px] text-gray-400">3D anatomy / science</div>
+                    <div class="font-bold text-white text-[11px]">Deep-Dive</div>
+                    <div class="text-[9px] text-gray-400">3D anatomy / science</div>
                   </div>
                   <button class="text-gray-400 hover:text-white p-1">
-                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                    <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
                   </button>
                 </div>
               </div>
 
               <!-- Language Switcher: English / Bengali -->
               <div>
-                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Language</label>
-                <div class="grid grid-cols-2 gap-1.5 p-1 bg-brand-card rounded-lg border border-brand-border mb-2">
-                  <button id="lang-btn-en" onclick="setStudioLanguage('en')" class="py-1 rounded font-bold text-xs bg-brand-yellow text-black transition">English</button>
-                  <button id="lang-btn-bn" onclick="setStudioLanguage('bn')" class="py-1 rounded font-medium text-xs text-gray-400 hover:text-white transition">Bengali</button>
+                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-0.5">Language</label>
+                <div class="grid grid-cols-2 gap-1 p-0.5 bg-brand-card rounded-lg border border-brand-border mb-1.5">
+                  <button id="lang-btn-en" onclick="setStudioLanguage('en')" class="py-1 rounded font-bold text-[11px] bg-brand-yellow text-black transition">English</button>
+                  <button id="lang-btn-bn" onclick="setStudioLanguage('bn')" class="py-1 rounded font-medium text-[11px] text-gray-400 hover:text-white transition">Bengali</button>
                 </div>
 
                 <!-- Voice Dropdown -->
-                <div class="flex items-center gap-1.5">
-                  <select id="voice-select" class="flex-1 bg-brand-card border border-brand-border rounded-lg p-2 text-xs text-white focus:outline-none">
+                <div class="flex items-center gap-1">
+                  <select id="voice-select" class="flex-1 bg-brand-card border border-brand-border rounded-lg p-1.5 text-[11px] text-white focus:outline-none">
                     <option value="am_michael">am_michael (Kokoro)</option>
                     <option value="af_bella">af_bella (Kokoro)</option>
                     <option value="bn-BD-PradeepNeural">bn-BD-PradeepNeural (Bengali Male)</option>
                     <option value="bn-BD-NabanitaNeural">bn-BD-NabanitaNeural (Bengali Female)</option>
                   </select>
-                  <button onclick="playSampleVoice()" title="Play Voice Sample" class="p-2 rounded-lg bg-brand-card border border-brand-border text-gray-300 hover:text-brand-yellow">
-                    <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                  <button onclick="playSampleVoice()" title="Play Voice Sample" class="p-1.5 rounded-lg bg-brand-card border border-brand-border text-gray-300 hover:text-brand-yellow">
+                    <i data-lucide="play" class="w-3 h-3 fill-gray-300"></i>
                   </button>
                 </div>
               </div>
 
               <!-- BGM Mood -->
               <div>
-                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">BGM Mood</label>
-                <div class="flex items-center gap-1.5 bg-brand-card border border-brand-border rounded-lg p-2">
-                  <i data-lucide="music" class="w-3.5 h-3.5 text-brand-yellow shrink-0"></i>
-                  <select class="flex-1 bg-transparent text-xs text-white focus:outline-none">
+                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-0.5">BGM Mood</label>
+                <div class="flex items-center gap-1.5 bg-brand-card border border-brand-border rounded-lg p-1.5">
+                  <i data-lucide="music" class="w-3 h-3 text-brand-yellow shrink-0"></i>
+                  <select class="flex-1 bg-transparent text-[11px] text-white focus:outline-none">
                     <option value="tension">Tension</option>
                     <option value="mystery">Mystery</option>
                     <option value="upbeat">Upbeat</option>
@@ -493,25 +493,25 @@
 
               <!-- Overlays Toggles (Kinetic Captions, Progress Bar, Bloom) -->
               <div>
-                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Overlays</label>
-                <div class="space-y-1.5 bg-brand-card p-2.5 rounded-lg border border-brand-border text-xs">
+                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-0.5">Overlays</label>
+                <div class="space-y-1.5 bg-brand-card p-2 rounded-lg border border-brand-border text-xs">
                   <div class="flex items-center justify-between">
-                    <span class="text-gray-300 flex items-center gap-1.5">
-                      <span class="w-2 h-2 rounded-full bg-brand-yellow"></span> Kinetic Captions
+                    <span class="text-gray-300 flex items-center gap-1.5 text-[11px]">
+                      <span class="w-1.5 h-1.5 rounded-full bg-brand-yellow"></span> Kinetic Captions
                     </span>
-                    <input type="checkbox" checked class="accent-brand-yellow cursor-pointer">
+                    <input type="checkbox" checked class="accent-brand-yellow cursor-pointer w-3.5 h-3.5">
                   </div>
                   <div class="flex items-center justify-between">
-                    <span class="text-gray-300 flex items-center gap-1.5">
-                      <span class="w-2 h-2 rounded-full bg-brand-yellow"></span> Progress Bar
+                    <span class="text-gray-300 flex items-center gap-1.5 text-[11px]">
+                      <span class="w-1.5 h-1.5 rounded-full bg-brand-yellow"></span> Progress Bar
                     </span>
-                    <input type="checkbox" checked class="accent-brand-yellow cursor-pointer">
+                    <input type="checkbox" checked class="accent-brand-yellow cursor-pointer w-3.5 h-3.5">
                   </div>
                   <div class="flex items-center justify-between">
-                    <span class="text-gray-300 flex items-center gap-1.5">
-                      <span class="w-2 h-2 rounded-full bg-gray-500"></span> Bloom / DOF
+                    <span class="text-gray-300 flex items-center gap-1.5 text-[11px]">
+                      <span class="w-1.5 h-1.5 rounded-full bg-gray-500"></span> Bloom / DOF
                     </span>
-                    <input type="checkbox" class="accent-brand-yellow cursor-pointer">
+                    <input type="checkbox" class="accent-brand-yellow cursor-pointer w-3.5 h-3.5">
                   </div>
                 </div>
               </div>
@@ -774,10 +774,10 @@
     // Defined exact scenes from the reference image
     const REFERENCE_SCENES = [
       { id: "01", title: "The Hook", time: "0:00 - 0:04.2", thumb: "/media/assets/demo/thumb_xray.jpg", text: "What happens if you swallow *chewing gum*?", action: "A piece of chewing gum enters the mouth, moves down the esophagus, and reaches the stomach.", sfx: "whoosh", emphasis: "*chewing gum*", duration: 4.20 },
-      { id: "02", title: "To the Stomach", time: "0:04.2 - 0:11.5", thumb: "/media/assets/demo/thumb_hook.jpg", text: "Well, it slides down your throat and lands right in your stomach, where strong acid gets to work on it.", action: "Acid bubbles up in the translucent stomach attempting to break down the gum polymer.", sfx: "gulp", emphasis: "*strong acid*", duration: 7.30 },
+      { id: "02", title: "To the Stomach", time: "0:04.2 - 0:11.5", thumb: "/media/assets/demo/thumb_xray.jpg", text: "Well, it slides down your throat and lands right in your stomach, where strong acid gets to work on it.", action: "Acid bubbles up in the translucent stomach attempting to break down the gum polymer.", sfx: "gulp", emphasis: "*strong acid*", duration: 7.30 },
       { id: "03", title: "What Really Happens?", time: "0:11.5 - 0:18.0", thumb: "/media/assets/demo/thumb_block.jpg", text: "The sugar and flavor dissolve quickly, but the gum base is different. It is a rubbery polymer.", action: "Molecular zoom into the polymer chain showing rubbery bonds resisting hydrochloric acid.", sfx: "boing", emphasis: "*rubbery polymer*", duration: 6.50 },
       { id: "04", title: "Does It Stay Forever?", time: "0:18.0 - 0:26.0", thumb: "/media/assets/demo/thumb_block.jpg", text: "Does it stay there for seven years? No, that's a total myth. Your gut just keeps pushing it along.", action: "Peristaltic muscular contractions pushing the gum smoothly through the digestive tract.", sfx: "whoosh", emphasis: "*total myth*", duration: 8.00 },
-      { id: "05", title: "The Truth", time: "0:26.0 - 0:34.0", thumb: "/media/assets/demo/thumb_hook.jpg", text: "Within a few days, it's out of your system. But if you swallow a lot of gum all at once,", action: "Multiple pieces of gum clumping together into a large blockage inside the small intestine.", sfx: "alarm", emphasis: "*all at once*", duration: 8.00 },
+      { id: "05", title: "The Truth", time: "0:26.0 - 0:34.0", thumb: "/media/assets/demo/thumb_block.jpg", text: "Within a few days, it's out of your system. But if you swallow a lot of gum all at once,", action: "Multiple pieces of gum clumping together into a large blockage inside the small intestine.", sfx: "alarm", emphasis: "*all at once*", duration: 8.00 },
       { id: "06", title: "Final Takeaway", time: "0:34.0 - 0:42.0", thumb: "/media/assets/demo/thumb_xray.jpg", text: "It can clump together and actually block your gut. So maybe, just spit it out.", action: "Camera pulls back to the full human silhouette showing the final takeaway warning.", sfx: "impact", emphasis: "*spit it out*", duration: 8.00 }
     ];
 
