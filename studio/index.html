@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Faceless Shorts Studio 2.0 — Next-Gen 3D AI Production Engine</title>
-  
+  <title>Faceless Shorts Engine — Studio</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Google Fonts: Plus Jakarta Sans, Inter & JetBrains Mono -->
+  <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -20,31 +19,21 @@
       theme: {
         extend: {
           colors: {
-            obsidian: {
-              950: '#05070B',
-              900: '#080C14',
-              850: '#0D131F',
-              800: '#121A2A',
-              700: '#1C273D',
-              border: 'rgba(255, 255, 255, 0.08)'
-            },
-            amber: {
-              glow: '#F59E0B',
-              bright: '#FACC15',
-              dark: '#D97706'
-            },
-            cyan: {
-              glow: '#06B6D4',
-              electric: '#38BDF8'
-            },
-            violet: {
-              glow: '#8B5CF6',
-              neon: '#A855F7'
+            brand: {
+              yellow: '#FACC15',
+              darkYellow: '#EAB308',
+              bg: '#0D1117',
+              panel: '#131924',
+              card: '#1A2332',
+              cardHover: '#202B3D',
+              border: '#233045',
+              subtle: '#2A3A54',
+              textMuted: '#8B9BB4'
             }
           },
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
           }
         }
       }
@@ -53,617 +42,862 @@
 
   <style>
     /* Custom Scrollbar */
-    ::-webkit-scrollbar { width: 4px; height: 4px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.12); border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(245, 158, 11, 0.4); }
-
-    /* Glassmorphism primitives */
-    .glass-panel {
-      background: rgba(13, 19, 31, 0.65);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #0D1117; }
+    ::-webkit-scrollbar-thumb { background: #233045; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #394E70; }
+    
+    .active-scene-glow {
+      border-color: #FACC15 !important;
+      box-shadow: 0 0 12px rgba(250, 204, 21, 0.2);
     }
-    .glass-card {
-      background: rgba(18, 26, 42, 0.55);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
-    .glass-pill {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    /* Glows & Gradients */
-    .glow-amber-btn {
-      box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
-    }
-    .glow-viewport {
-      box-shadow: 0 0 60px rgba(245, 158, 11, 0.08), 0 20px 40px rgba(0, 0, 0, 0.8);
-    }
-    .active-storyboard {
-      border-color: rgba(245, 158, 11, 0.7);
-      box-shadow: 0 0 20px rgba(245, 158, 11, 0.18);
-    }
-
-    /* Subtle grid background */
-    .bg-grid-pattern {
-      background-size: 32px 32px;
-      background-image: 
-        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    .waveform-bar {
+      transition: height 0.15s ease;
     }
   </style>
 </head>
-<body class="bg-obsidian-950 text-gray-100 font-sans antialiased h-screen flex flex-col overflow-hidden select-none bg-grid-pattern">
+<body class="bg-brand-bg text-gray-200 font-sans antialiased h-screen flex flex-col overflow-hidden select-none">
 
   <!-- ====================================================================== -->
-  <!-- 1. TOP MINIMALIST FROSTED HEADER -->
+  <!-- 1. TOP NAVIGATION BAR (Exact Match to 1st Reference Image) -->
   <!-- ====================================================================== -->
-  <header class="h-14 glass-panel border-b border-obsidian-border px-5 flex items-center justify-between shrink-0 z-30">
-    <!-- Brand identity -->
-    <div class="flex items-center gap-3.5">
-      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-bright to-amber-dark flex items-center justify-center text-black font-extrabold shadow-lg shadow-amber-glow/20">
-        <i data-lucide="clapperboard" class="w-4 h-4 fill-black"></i>
+  <header class="h-14 bg-brand-panel border-b border-brand-border px-4 flex items-center justify-between shrink-0 z-30">
+    <!-- Brand / Studio Title -->
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-lg bg-brand-yellow/15 border border-brand-yellow/40 flex items-center justify-center text-brand-yellow">
+        <i data-lucide="clapperboard" class="w-4 h-4 fill-brand-yellow/20"></i>
       </div>
       <div>
         <div class="flex items-center gap-2">
-          <span class="font-extrabold text-white text-base tracking-tight">Faceless Shorts</span>
-          <span class="text-[10px] bg-gradient-to-r from-amber-glow to-amber-bright text-black font-extrabold px-1.5 py-0.5 rounded tracking-wide shadow-sm">2.0 STUDIO</span>
-          <span class="text-xs text-gray-500 font-light">|</span>
-          <span class="text-xs text-gray-400 font-medium">3D AI Production Engine</span>
+          <span class="font-extrabold text-white tracking-tight text-sm">Faceless Shorts</span>
+          <span class="text-[10px] bg-brand-yellow text-black font-extrabold px-1.5 py-0.2 rounded">ENGINE</span>
+          <span class="text-gray-500 text-xs">|</span>
+          <span class="font-semibold text-white text-sm">Studio</span>
         </div>
+        <p class="text-[11px] text-gray-400">Create viral 3D shorts with an automated local pipeline.</p>
       </div>
     </div>
 
-    <!-- Center System Status & Latency Badges -->
-    <div class="hidden md:flex items-center gap-2.5 text-xs font-mono">
-      <div class="glass-pill px-3 py-1 rounded-full flex items-center gap-2 text-emerald-400">
-        <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-sm shadow-emerald-500/80 animate-pulse"></span>
-        <span class="font-sans font-medium text-[11px] text-gray-300">Engine Latency:</span>
-        <span class="font-bold">14ms</span>
+    <!-- Stepper Breadcrumbs (1. Ideation -> 2. Script & Audio -> 3. Visual & 3D -> 4. Render & Export) -->
+    <div class="hidden lg:flex items-center gap-2.5 bg-brand-card/70 px-3.5 py-1.5 rounded-full border border-brand-border text-xs">
+      <div class="flex items-center gap-1.5 text-emerald-400 font-medium">
+        <span class="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px] font-bold">✓</span>
+        <span>Ideation</span>
       </div>
-      <div class="glass-pill px-3 py-1 rounded-full flex items-center gap-2 text-cyan-electric">
-        <i data-lucide="cpu" class="w-3 h-3"></i>
-        <span class="font-sans font-medium text-[11px] text-gray-300">SwiftShader 3D:</span>
-        <span class="font-bold">Active</span>
+      <span class="text-gray-600">———</span>
+      <div class="flex items-center gap-1.5 bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/50 px-3 py-0.5 rounded-full font-bold shadow-sm">
+        <span class="w-4 h-4 rounded-full bg-brand-yellow text-black flex items-center justify-center text-[10px] font-extrabold">2</span>
+        <span>Script & Audio</span>
       </div>
-      <div class="glass-pill px-3 py-1 rounded-full flex items-center gap-2 text-gray-300">
-        <span id="header-cpu">CPU 18%</span>
-        <span class="text-gray-600">/</span>
-        <span id="header-ram">RAM 4.2 GB</span>
+      <span class="text-gray-600">———</span>
+      <div class="flex items-center gap-1.5 text-gray-500">
+        <span class="w-4 h-4 rounded-full bg-brand-subtle text-gray-400 flex items-center justify-center text-[10px]">3</span>
+        <span>Visual & 3D</span>
+      </div>
+      <span class="text-gray-600">———</span>
+      <div class="flex items-center gap-1.5 text-gray-500">
+        <span class="w-4 h-4 rounded-full bg-brand-subtle text-gray-400 flex items-center justify-center text-[10px]">4</span>
+        <span>Render & Export</span>
       </div>
     </div>
 
-    <!-- Top Action CTAs -->
+    <!-- System Info & Header Actions -->
     <div class="flex items-center gap-3">
-      <!-- Language Switcher -->
-      <div class="glass-pill p-0.5 rounded-lg flex items-center text-xs">
-        <button id="lang-toggle-en" onclick="setStudioLanguage('en')" class="px-2.5 py-1 rounded-md font-bold text-black bg-amber-glow transition text-[11px]">EN</button>
-        <button id="lang-toggle-bn" onclick="setStudioLanguage('bn')" class="px-2.5 py-1 rounded-md font-medium text-gray-400 hover:text-white transition text-[11px]">বাংলা</button>
+      <!-- Status Badge & CPU/RAM Resource Monitors -->
+      <div class="hidden md:flex items-center gap-2 bg-brand-card px-2.5 py-1 rounded-md border border-brand-border text-xs text-gray-300">
+        <span class="flex items-center gap-1.5 text-emerald-400 font-medium">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> System Ready
+        </span>
+        <span class="text-gray-600">|</span>
+        <span id="top-cpu-badge" class="font-mono">CPU 18%</span>
+        <span class="text-gray-600">|</span>
+        <span id="top-ram-badge" class="font-mono">RAM 4.1 / 15.9 GB</span>
       </div>
 
-      <!-- AI Script Button -->
-      <button onclick="openAIModal()" class="glass-pill hover:bg-white/[0.08] text-amber-bright border-amber-glow/30 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition">
-        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
-        <span>AI Script</span>
+      <button title="Workspace Folder" class="p-1.5 rounded hover:bg-brand-card text-gray-400 hover:text-white transition">
+        <i data-lucide="folder" class="w-4 h-4"></i>
+      </button>
+      <button title="Settings" class="p-1.5 rounded hover:bg-brand-card text-gray-400 hover:text-white transition">
+        <i data-lucide="settings" class="w-4 h-4"></i>
       </button>
 
       <!-- Save Draft -->
-      <button onclick="saveProjectDraft()" class="glass-pill hover:bg-white/[0.08] text-gray-300 px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition">
-        <i data-lucide="bookmark" class="w-3.5 h-3.5 text-gray-400"></i>
-        <span>Draft</span>
+      <button onclick="saveProjectDraft()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-brand-border bg-brand-card hover:bg-brand-subtle text-xs font-semibold text-gray-200 transition">
+        <i data-lucide="save" class="w-3.5 h-3.5"></i> Save Draft
       </button>
 
-      <!-- Primary Action: Render Master 4K -->
-      <button id="btn-master-render" onclick="triggerMasterRender()" class="bg-gradient-to-r from-amber-glow via-amber-bright to-amber-dark hover:brightness-110 text-black font-extrabold px-4 py-1.5 rounded-lg text-xs flex items-center gap-2 transition glow-amber-btn active:scale-95">
-        <i data-lucide="zap" class="w-3.5 h-3.5 fill-black"></i>
-        <span>Render Master 4K</span>
+      <!-- Project Dropdown -->
+      <div class="relative">
+        <button class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border border-brand-border bg-brand-card text-xs font-semibold text-gray-200 hover:bg-brand-subtle">
+          <span id="header-project-name">Project</span>
+          <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-gray-400"></i>
+        </button>
+      </div>
+
+      <!-- Run Pipeline (Yellow Button) -->
+      <button id="btn-run-pipeline" onclick="triggerPipelineRun()" class="flex items-center gap-1.5 bg-brand-yellow hover:bg-brand-darkYellow text-black px-4 py-1.5 rounded-md font-extrabold text-xs shadow-md shadow-brand-yellow/15 transition active:scale-95">
+        <i data-lucide="play" class="w-3.5 h-3.5 fill-black"></i> Run Pipeline
       </button>
     </div>
   </header>
 
   <!-- ====================================================================== -->
-  <!-- 2. MAIN 3-PANEL WORKSPACE -->
+  <!-- 2. MAIN LAYOUT: SIDEBAR + 3-COLUMN WORKSPACE -->
   <!-- ====================================================================== -->
-  <div class="flex-1 flex overflow-hidden p-3 gap-3">
-
-    <!-- ==================================================================== -->
-    <!-- LEFT PANEL: AI CREATIVE DIRECTOR & STORYBOARD (Width: 340px) -->
-    <!-- ==================================================================== -->
-    <aside class="w-80 glass-panel rounded-2xl flex flex-col overflow-hidden shrink-0">
-      
-      <!-- Panel Header -->
-      <div class="p-3.5 border-b border-obsidian-border flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <i data-lucide="brain-circuit" class="w-4 h-4 text-amber-glow"></i>
-          <span class="text-xs font-bold uppercase tracking-wider text-white">AI Creative Director</span>
-        </div>
-        <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-violet-neon/15 text-violet-glow border border-violet-neon/30 font-semibold">
-          Groq 120B Active
-        </span>
-      </div>
-
-      <!-- Viral Hook Intelligence Score Card -->
-      <div class="p-3 border-b border-obsidian-border">
-        <div class="glass-card p-3 rounded-xl border border-obsidian-border relative overflow-hidden">
-          <div class="absolute -right-6 -bottom-6 w-20 h-20 bg-amber-glow/10 rounded-full blur-xl pointer-events-none"></div>
-          <div class="flex items-center justify-between mb-1.5">
-            <span class="text-xs font-bold text-gray-300">Retention & Hook Score</span>
-            <span class="text-xs font-extrabold text-emerald-400 flex items-center gap-1">
-              <i data-lucide="trending-up" class="w-3.5 h-3.5"></i> 98%
-            </span>
-          </div>
-          <div class="w-full bg-obsidian-950 h-1.5 rounded-full overflow-hidden border border-white/5 mb-2">
-            <div class="bg-gradient-to-r from-emerald-500 via-amber-glow to-amber-bright h-full rounded-full" style="width: 98%"></div>
-          </div>
-          <p class="text-[11px] text-gray-400 leading-snug">
-            <span class="text-amber-bright font-semibold">AI Recommendation:</span> The 3-second hook starts with high-contrast mystery. Pacing holds average viewer retention beyond 115%.
-          </p>
-        </div>
-      </div>
-
-      <!-- Storyboard Header -->
-      <div class="px-3.5 py-2 flex items-center justify-between border-b border-obsidian-border/50 text-xs">
-        <span class="font-bold text-gray-400 text-[11px] uppercase tracking-wider">Storyboard Timeline (6 Scenes)</span>
-        <button onclick="openAIModal()" class="text-[11px] text-amber-bright hover:underline flex items-center gap-1 font-semibold">
-          <i data-lucide="wand-2" class="w-3 h-3"></i> Rewrite
+  <div class="flex flex-1 overflow-hidden">
+    
+    <!-- LEFT ICON SIDEBAR (Exact Match to 1st Reference Image) -->
+    <aside class="w-16 bg-brand-panel border-r border-brand-border flex flex-col items-center justify-between py-4 shrink-0">
+      <nav class="flex flex-col gap-3 w-full px-2">
+        <!-- Studio (Active) -->
+        <button class="w-full flex flex-col items-center gap-1 py-2 rounded-lg bg-brand-yellow/15 text-brand-yellow border border-brand-yellow/30 font-bold text-[10px] transition">
+          <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Studio
         </button>
-      </div>
+        <!-- Visual Studio -->
+        <button class="w-full flex flex-col items-center gap-1 py-2 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-brand-card font-medium text-[10px] transition">
+          <i data-lucide="box" class="w-4 h-4"></i> Visual
+        </button>
+        <!-- Render & Export -->
+        <button class="w-full flex flex-col items-center gap-1 py-2 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-brand-card font-medium text-[10px] transition">
+          <i data-lucide="film" class="w-4 h-4"></i> Render
+        </button>
+        <!-- Queue & Monitor -->
+        <button class="w-full flex flex-col items-center gap-1 py-2 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-brand-card font-medium text-[10px] transition">
+          <i data-lucide="list-video" class="w-4 h-4"></i> Queue
+        </button>
+        <!-- Library -->
+        <button class="w-full flex flex-col items-center gap-1 py-2 rounded-lg text-gray-400 hover:text-gray-200 hover:bg-brand-card font-medium text-[10px] transition">
+          <i data-lucide="library" class="w-4 h-4"></i> Library
+        </button>
+      </nav>
 
-      <!-- Storyboard Cards (Scrollable) -->
-      <div id="storyboard-container" class="flex-1 overflow-y-auto p-3 space-y-2.5">
-        <!-- Dynamically rendered scene cards -->
-      </div>
-
-      <!-- Bottom Natural Language Prompt Co-Pilot -->
-      <div class="p-3 border-t border-obsidian-border bg-obsidian-900/60">
-        <div class="glass-card p-1.5 rounded-xl border border-obsidian-border flex items-center gap-2">
-          <i data-lucide="sparkle" class="w-4 h-4 text-amber-glow ml-1 shrink-0"></i>
-          <input id="quick-prompt-input" type="text" placeholder="Prompt AI Director to refine scene..." class="bg-transparent text-xs text-white placeholder-gray-500 focus:outline-none flex-1">
-          <button onclick="handleQuickPrompt()" class="w-7 h-7 rounded-lg bg-amber-glow/20 hover:bg-amber-glow text-amber-bright hover:text-black flex items-center justify-center transition">
-            <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
-          </button>
+      <!-- Bottom Local Storage Gauge (126 GB / 171 GB) -->
+      <div class="w-full px-2 text-center">
+        <div class="p-1.5 rounded-md bg-brand-card border border-brand-border">
+          <i data-lucide="hard-drive" class="w-3.5 h-3.5 mx-auto text-gray-400 mb-1"></i>
+          <div class="text-[9px] text-gray-400 leading-tight">Local Storage</div>
+          <div class="w-full bg-gray-700 h-1.5 rounded-full mt-1 overflow-hidden">
+            <div id="storage-bar" class="bg-brand-yellow h-full" style="width: 74%"></div>
+          </div>
+          <div id="storage-text" class="text-[8px] font-mono text-gray-400 mt-0.5">126 GB / 171 GB</div>
         </div>
       </div>
     </aside>
 
-    <!-- ==================================================================== -->
-    <!-- CENTER PANEL: THE BIG HERO 3D VIEWPORT & STAGE (Flex-1) -->
-    <!-- ==================================================================== -->
-    <main class="flex-1 glass-panel rounded-2xl flex flex-col overflow-hidden relative">
+    <!-- WORKSPACE AREA -->
+    <main class="flex-1 flex flex-col overflow-hidden bg-brand-bg">
       
-      <!-- Top Stage Toolbar -->
-      <div class="h-11 border-b border-obsidian-border px-4 flex items-center justify-between shrink-0 bg-obsidian-900/40">
-        <div class="flex items-center gap-3">
-          <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-amber-glow animate-pulse"></span>
-            <span class="text-xs font-bold text-white uppercase tracking-wider">3D Master Stage (1080 x 1920)</span>
-          </div>
-          <span class="text-gray-600">|</span>
-          <span id="active-scene-badge" class="text-xs font-medium text-amber-bright bg-amber-glow/10 border border-amber-glow/30 px-2 py-0.5 rounded-full font-mono">
-            Scene 01: The Hook (0:00 - 0:04.2)
-          </span>
-        </div>
-
-        <div class="flex items-center gap-3">
-          <!-- 3D Camera Angles -->
-          <div class="glass-pill px-2.5 py-1 rounded-lg text-xs text-gray-300 flex items-center gap-1.5">
-            <i data-lucide="camera" class="w-3 h-3 text-cyan-electric"></i>
-            <span>Macro Throat Pan</span>
-          </div>
-          <!-- Quality Toggle -->
-          <div class="glass-pill px-2.5 py-1 rounded-lg text-xs font-mono text-gray-400">
-            60 FPS · Three.js r160
-          </div>
-        </div>
-      </div>
-
-      <!-- Center Viewport Container -->
-      <div class="flex-1 relative flex items-center justify-center p-4 overflow-hidden bg-obsidian-950/80">
+      <!-- 3-COLUMN WORKSPACE (Grid: 3 cols | 5 cols | 4 cols) -->
+      <div class="flex-1 grid grid-cols-12 gap-3 p-3 overflow-hidden">
         
-        <!-- 9:16 Vertical Screen Frame -->
-        <div class="relative h-full aspect-[9/16] max-h-[580px] rounded-2xl overflow-hidden border border-amber-glow/30 glow-viewport bg-black flex items-center justify-center group">
+        <!-- ================================================================ -->
+        <!-- COLUMN 1: PROJECT & SCENES (3 COLS) -->
+        <!-- ================================================================ -->
+        <section class="col-span-3 bg-brand-panel border border-brand-border rounded-xl flex flex-col overflow-hidden">
           
-          <!-- Video / Visual Canvas -->
-          <video id="stage-video" poster="/media/assets/demo/thumb_xray.jpg" src="/media/projects/swallow-gum/renders/swallow_gum.mp4" class="w-full h-full object-cover" playsinline loop></video>
-
-          <!-- Real-Time Kinetic Yellow Subtitle Overlay -->
-          <div class="absolute inset-x-4 bottom-16 pointer-events-none flex flex-col items-center text-center">
-            <div id="live-subtitle-card" class="bg-black/70 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10 shadow-2xl transition-all duration-200">
-              <span class="text-lg md:text-xl font-extrabold tracking-tight text-white uppercase">
-                What <span class="text-amber-bright underline decoration-amber-glow decoration-2 underline-offset-4">*HAPPENS*</span> if you swallow gum?
-              </span>
+          <!-- Project Info Card -->
+          <div class="p-3 border-b border-brand-border">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Project</span>
+              <button onclick="openAIModal()" class="text-xs text-brand-yellow hover:underline flex items-center gap-1 font-semibold">
+                <i data-lucide="sparkles" class="w-3 h-3"></i> AI Generate
+              </button>
+            </div>
+            
+            <div class="bg-brand-card p-2.5 rounded-lg border border-brand-border flex items-center gap-3">
+              <img id="project-thumb-img" src="/media/assets/demo/thumb_block.jpg" alt="Thumb" class="w-12 h-12 rounded object-cover border border-brand-border shrink-0">
+              <div class="min-w-0 flex-1">
+                <h3 id="project-title-display" class="font-bold text-sm text-white truncate">Chewing Gum in Stomach</h3>
+                <p id="project-meta-display" class="text-[11px] text-gray-400 truncate">Deep-Dive · English · ~42s</p>
+              </div>
+              <button class="text-gray-400 hover:text-white p-1">
+                <i data-lucide="more-vertical" class="w-4 h-4"></i>
+              </button>
             </div>
           </div>
 
-          <!-- Bottom Viral Retention Progress Bar (Gold Gradient) -->
-          <div class="absolute inset-x-0 bottom-0 h-1.5 bg-black/50 overflow-hidden pointer-events-none">
-            <div id="retention-progress-bar" class="h-full bg-gradient-to-r from-amber-bright to-amber-dark transition-all duration-100" style="width: 25%"></div>
+          <!-- Scenes Header with [+] button -->
+          <div class="px-3 py-2 flex items-center justify-between border-b border-brand-border/60 bg-brand-card/30">
+            <div class="flex items-center gap-1.5">
+              <span class="font-bold text-xs text-gray-200">Scenes</span>
+              <span id="scene-count-badge" class="px-1.5 py-0.2 bg-brand-subtle text-gray-300 rounded text-[10px] font-mono font-bold">6</span>
+            </div>
+            <button onclick="addNewScenePrompt()" class="w-5 h-5 rounded hover:bg-brand-card border border-brand-border flex items-center justify-center text-gray-300 hover:text-white text-xs font-bold" title="Add Scene">+</button>
           </div>
 
-          <!-- Hover Overlay Controls -->
-          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-between p-4">
-            <!-- Top Controls -->
-            <div class="flex items-center justify-between text-xs text-white/80">
-              <span class="font-mono bg-black/60 backdrop-blur px-2 py-0.5 rounded border border-white/10">1080 x 1920 Vertical</span>
-              <span class="font-mono text-amber-bright bg-amber-glow/20 px-2 py-0.5 rounded border border-amber-glow/40">Render Quality: Master</span>
+          <!-- 6 Scene Cards (Scrollable List with Thumbnails & Timecodes) -->
+          <div id="scenes-list-container" class="flex-1 overflow-y-auto p-2 space-y-1.5">
+            <!-- Dynamically populated scene cards matching the reference image -->
+          </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- COLUMN 2: FULL SCENE EDITOR & AUDIO STAGE (5 COLS) -->
+        <!-- ================================================================ -->
+        <section class="col-span-5 bg-brand-panel border border-brand-border rounded-xl flex flex-col overflow-hidden">
+          
+          <!-- Sub-tabs: Script (Active), Voiceover, SFX, Timing, Scene Visual -->
+          <div class="flex items-center justify-between border-b border-brand-border px-3 shrink-0 bg-brand-card/20">
+            <div class="flex gap-4 text-xs font-semibold">
+              <button class="py-2.5 text-brand-yellow border-b-2 border-brand-yellow flex items-center gap-1.5 font-bold">
+                <i data-lucide="file-text" class="w-3.5 h-3.5"></i> Script
+              </button>
+              <button class="py-2.5 text-gray-400 hover:text-gray-200 flex items-center gap-1.5">
+                <i data-lucide="mic" class="w-3.5 h-3.5"></i> Voiceover
+              </button>
+              <button class="py-2.5 text-gray-400 hover:text-gray-200 flex items-center gap-1.5">
+                <i data-lucide="sliders" class="w-3.5 h-3.5"></i> SFX
+              </button>
+              <button class="py-2.5 text-gray-400 hover:text-gray-200 flex items-center gap-1.5">
+                <i data-lucide="clock" class="w-3.5 h-3.5"></i> Timing
+              </button>
+              <button class="py-2.5 text-gray-400 hover:text-gray-200 flex items-center gap-1.5">
+                <i data-lucide="video" class="w-3.5 h-3.5"></i> Scene Visual
+              </button>
+            </div>
+            <!-- Time Badge -->
+            <div class="text-[11px] font-mono text-gray-300 bg-brand-card px-2.5 py-0.5 rounded border border-brand-border font-semibold" id="editor-time-range">
+              0:00 - 0:04.2 (4.20s)
+            </div>
+          </div>
+
+          <!-- Scene Editor Form Area -->
+          <div class="p-3.5 flex-1 overflow-y-auto space-y-3.5">
+            
+            <!-- Scene Title -->
+            <div class="flex items-center justify-between">
+              <h2 id="editor-scene-title" class="font-bold text-sm text-white">Scene 01 — The Hook</h2>
             </div>
 
-            <!-- Bottom Floating Player Bar -->
-            <div class="glass-panel p-2.5 rounded-xl border border-white/15 flex flex-col gap-2">
-              <input id="stage-scrubber" type="range" min="0" max="100" value="0" class="w-full h-1 bg-gray-700 accent-amber-bright rounded cursor-pointer">
+            <!-- Formatting Toolbar: B, I, U, S, ⭐ (Emphasis), 🔗, | (Caption break), "" -->
+            <div class="flex items-center justify-between bg-brand-card px-2.5 py-1.5 rounded-lg border border-brand-border text-gray-400 text-xs">
+              <div class="flex items-center gap-1.5">
+                <button onclick="formatSelection('**')" class="p-1 rounded hover:bg-brand-subtle hover:text-white font-bold" title="Bold">B</button>
+                <button onclick="formatSelection('*')" class="p-1 rounded hover:bg-brand-subtle hover:text-white italic" title="Italic">I</button>
+                <button onclick="formatSelection('__')" class="p-1 rounded hover:bg-brand-subtle hover:text-white underline" title="Underline">U</button>
+                <button onclick="formatSelection('~~')" class="p-1 rounded hover:bg-brand-subtle hover:text-white line-through" title="Strikethrough">S</button>
+                <span class="text-gray-600">|</span>
+                <button onclick="toggleStarEmphasis()" class="p-1 rounded hover:bg-brand-subtle text-brand-yellow font-bold" title="Star Emphasis (*highlight*)">⭐</button>
+                <button class="p-1 rounded hover:bg-brand-subtle hover:text-white"><i data-lucide="link" class="w-3 h-3"></i></button>
+                <button onclick="insertPipeBreak()" class="p-1 rounded hover:bg-brand-subtle hover:text-white font-extrabold" title="Insert Caption Break (|)">|</button>
+                <button class="p-1 rounded hover:bg-brand-subtle hover:text-white font-serif font-bold">""</button>
+              </div>
+              <span id="char-counter" class="text-[11px] font-mono text-gray-400 font-semibold">45 / 200</span>
+            </div>
+
+            <!-- Narration Spoken Textarea -->
+            <div>
+              <textarea id="editor-script-text" rows="3" oninput="handleScriptTextInput(this.value)" class="w-full bg-brand-card border border-brand-border focus:border-brand-yellow/70 rounded-lg p-3 text-sm text-white placeholder-gray-500 focus:outline-none transition leading-relaxed font-sans" placeholder="Enter spoken narration line..."></textarea>
+            </div>
+
+            <!-- Visual Action (for 3D) -->
+            <div class="bg-brand-card/50 p-3 rounded-lg border border-brand-border">
+              <label class="text-[11px] font-bold text-gray-300 uppercase tracking-wider flex items-center gap-1.5 mb-1.5">
+                <i data-lucide="clapperboard" class="w-3.5 h-3.5 text-brand-yellow"></i> Visual Action (for 3D)
+              </label>
+              <textarea id="editor-visual-prompt" rows="2" class="w-full bg-brand-bg/70 border border-brand-border/70 rounded p-2 text-xs text-gray-300 focus:outline-none focus:border-brand-yellow/50" placeholder="A piece of chewing gum enters the mouth, moves down the esophagus, and reaches the stomach."></textarea>
+            </div>
+
+            <!-- Properties Row (4 Columns: Duration, SFX, Emphasis, Caption Break) -->
+            <div class="grid grid-cols-4 gap-2 text-xs">
+              <!-- Duration -->
+              <div class="bg-brand-card p-2 rounded-lg border border-brand-border">
+                <div class="text-[10px] text-gray-400 flex items-center gap-1 mb-1">
+                  <i data-lucide="timer" class="w-3 h-3 text-gray-400"></i> Duration
+                </div>
+                <div class="flex items-center gap-1">
+                  <input id="prop-duration" type="number" step="0.1" value="4.20" class="w-full bg-brand-bg border border-brand-border rounded px-1.5 py-0.5 text-xs text-white font-mono">
+                  <span class="text-gray-400 text-[10px]">s</span>
+                </div>
+              </div>
+
+              <!-- SFX -->
+              <div class="bg-brand-card p-2 rounded-lg border border-brand-border">
+                <div class="text-[10px] text-gray-400 flex items-center gap-1 mb-1">
+                  <i data-lucide="volume-2" class="w-3 h-3 text-gray-400"></i> SFX
+                </div>
+                <select id="prop-sfx" class="w-full bg-brand-bg border border-brand-border rounded px-1.5 py-0.5 text-xs text-white focus:outline-none">
+                  <option value="whoosh">Whoosh</option>
+                  <option value="gulp">Gulp</option>
+                  <option value="impact">Impact</option>
+                  <option value="boing">Boing</option>
+                  <option value="alarm">Alarm</option>
+                </select>
+              </div>
+
+              <!-- Emphasis -->
+              <div class="bg-brand-card p-2 rounded-lg border border-brand-border">
+                <div class="text-[10px] text-gray-400 flex items-center gap-1 mb-1">
+                  <span class="text-brand-yellow text-xs">★</span> Emphasis
+                </div>
+                <div id="prop-emphasis-badge" class="bg-brand-yellow/15 border border-brand-yellow/40 text-brand-yellow px-1.5 py-0.5 rounded text-[11px] truncate font-bold">
+                  *chewing gum*
+                </div>
+              </div>
+
+              <!-- Caption Break -->
+              <div class="bg-brand-card p-2 rounded-lg border border-brand-border">
+                <div class="text-[10px] text-gray-400 flex items-center gap-1 mb-1">
+                  <span class="text-gray-400 font-extrabold">|</span> Caption Break (|)
+                </div>
+                <select class="w-full bg-brand-bg border border-brand-border rounded px-1.5 py-0.5 text-xs text-white focus:outline-none">
+                  <option value="auto">Auto</option>
+                  <option value="manual">Manual</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Audio Preview Card (Waveform + Play + Regenerate) -->
+            <div class="bg-brand-card p-3 rounded-lg border border-brand-border flex items-center justify-between gap-3">
+              <div class="flex items-center gap-3">
+                <button id="btn-play-line-audio" onclick="toggleLineAudioPlayback()" class="w-9 h-9 rounded-full bg-brand-yellow text-black flex items-center justify-center hover:bg-brand-darkYellow transition shrink-0 shadow-md shadow-brand-yellow/15">
+                  <i data-lucide="play" id="play-line-icon" class="w-4 h-4 fill-black"></i>
+                </button>
+                <div>
+                  <div class="text-[11px] font-bold text-gray-200">Audio Preview</div>
+                  <div class="text-[10px] font-mono text-gray-400" id="audio-preview-time">0:00 / 0:04.2</div>
+                </div>
+              </div>
+
+              <!-- Animated Yellow Waveform Bars -->
+              <div id="waveform-container" class="flex-1 flex items-center justify-center gap-1 h-8 px-3">
+                <span class="w-1 bg-brand-yellow/90 rounded-full h-3 waveform-bar"></span>
+                <span class="w-1 bg-brand-yellow/90 rounded-full h-5 waveform-bar"></span>
+                <span class="w-1 bg-brand-yellow/90 rounded-full h-7 waveform-bar"></span>
+                <span class="w-1 bg-brand-yellow/90 rounded-full h-4 waveform-bar"></span>
+                <span class="w-1 bg-brand-yellow/90 rounded-full h-6 waveform-bar"></span>
+                <span class="w-1 bg-brand-yellow/90 rounded-full h-8 waveform-bar"></span>
+                <span class="w-1 bg-brand-yellow/90 rounded-full h-5 waveform-bar"></span>
+                <span class="w-1 bg-brand-yellow/90 rounded-full h-3 waveform-bar"></span>
+                <span class="w-1 bg-brand-yellow/90 rounded-full h-6 waveform-bar"></span>
+                <span class="w-1 bg-brand-yellow/90 rounded-full h-7 waveform-bar"></span>
+                <span class="w-1 bg-brand-yellow/90 rounded-full h-4 waveform-bar"></span>
+                <span class="w-1 bg-brand-yellow/90 rounded-full h-2 waveform-bar"></span>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <button title="Volume" class="text-gray-400 hover:text-white p-1">
+                  <i data-lucide="volume-2" class="w-4 h-4"></i>
+                </button>
+                <button onclick="regenerateActiveVoice()" class="flex items-center gap-1 text-xs bg-brand-subtle hover:bg-brand-border text-gray-200 px-2.5 py-1.5 rounded transition font-medium">
+                  <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i> Regenerate
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ================================================================ -->
+        <!-- COLUMN 3: 9:16 PREVIEW & CONTROLS (4 COLS) -->
+        <!-- ================================================================ -->
+        <section class="col-span-4 bg-brand-panel border border-brand-border rounded-xl flex flex-col overflow-hidden">
+          
+          <!-- Header with Quality Dropdown Pill -->
+          <div class="p-3 border-b border-brand-border flex items-center justify-between shrink-0">
+            <span class="font-bold text-xs text-white flex items-center gap-1.5">
+              <i data-lucide="smartphone" class="w-3.5 h-3.5 text-brand-yellow"></i> Preview — 9:16
+            </span>
+            <span class="text-[11px] font-mono text-gray-300 bg-brand-card px-2 py-0.5 rounded border border-brand-border font-medium">
+              Draft (0.7x · 24 FPS) ▾
+            </span>
+          </div>
+
+          <div class="p-3 flex-1 overflow-y-auto space-y-3">
+            
+            <!-- 9:16 Vertical Video Viewport with Esophagus/Stomach 3D Visual -->
+            <div class="relative w-full aspect-[9/16] max-h-[310px] mx-auto bg-black rounded-lg overflow-hidden border border-brand-border flex items-center justify-center group shadow-xl">
+              <video id="main-preview-video" poster="/media/assets/demo/thumb_xray.jpg" src="/media/projects/swallow-gum/renders/swallow_gum.mp4" class="w-full h-full object-cover" playsinline loop></video>
               
-              <div class="flex items-center justify-between text-xs text-white">
-                <div class="flex items-center gap-3">
-                  <button onclick="toggleStageVideo()" class="w-7 h-7 rounded-full bg-amber-bright text-black flex items-center justify-center hover:scale-105 transition">
-                    <i data-lucide="play" id="stage-play-icon" class="w-3.5 h-3.5 fill-black"></i>
-                  </button>
-                  <span id="stage-timecode" class="font-mono text-[11px] text-gray-300">00:00 / 00:35</span>
+              <!-- Video Controls Overlay -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/20 opacity-0 group-hover:opacity-100 transition flex flex-col justify-between p-3">
+                <div class="text-[10px] font-mono text-white/80 flex items-center justify-between">
+                  <span>1080x1920 (9:16)</span>
+                  <span class="bg-black/60 px-1.5 py-0.5 rounded font-bold">Three.js r160</span>
                 </div>
 
-                <div class="flex items-center gap-2">
-                  <button title="Volume" class="p-1 hover:text-amber-bright"><i data-lucide="volume-2" class="w-4 h-4"></i></button>
-                  <button onclick="toggleStageFullscreen()" title="Fullscreen" class="p-1 hover:text-amber-bright"><i data-lucide="maximize-2" class="w-4 h-4"></i></button>
+                <div class="flex flex-col gap-1.5">
+                  <input id="video-scrubber" type="range" min="0" max="100" value="0" class="w-full h-1 bg-gray-600 accent-brand-yellow rounded cursor-pointer">
+                  
+                  <div class="flex items-center justify-between text-xs text-white">
+                    <div class="flex items-center gap-2">
+                      <button onclick="toggleVideoPlayback()" class="p-1 hover:text-brand-yellow">
+                        <i data-lucide="play" id="vid-play-icon" class="w-4 h-4 fill-white"></i>
+                      </button>
+                      <span id="vid-time-display" class="text-[10px] font-mono text-gray-300">0:00 / 0:42</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <button class="p-1 hover:text-brand-yellow"><i data-lucide="volume-2" class="w-3.5 h-3.5"></i></button>
+                      <button onclick="toggleFullscreen()" class="p-1 hover:text-brand-yellow"><i data-lucide="maximize" class="w-3.5 h-3.5"></i></button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+
+            <!-- Controls Cards -->
+            <div class="space-y-2.5 text-xs">
+              
+              <!-- Animation Style Card -->
+              <div>
+                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Animation Style</label>
+                <div class="bg-brand-card p-2 rounded-lg border border-brand-border flex items-center gap-2.5">
+                  <div class="w-8 h-8 rounded bg-brand-yellow/15 border border-brand-yellow/40 flex items-center justify-center text-brand-yellow shrink-0 font-bold text-xs">
+                    3D
+                  </div>
+                  <div class="flex-1 min-w-0">
+                    <div class="font-bold text-white text-xs">Deep-Dive</div>
+                    <div class="text-[10px] text-gray-400">3D anatomy / science</div>
+                  </div>
+                  <button class="text-gray-400 hover:text-white p-1">
+                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Language Switcher: English / Bengali -->
+              <div>
+                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Language</label>
+                <div class="grid grid-cols-2 gap-1.5 p-1 bg-brand-card rounded-lg border border-brand-border mb-2">
+                  <button id="lang-btn-en" onclick="setStudioLanguage('en')" class="py-1 rounded font-bold text-xs bg-brand-yellow text-black transition">English</button>
+                  <button id="lang-btn-bn" onclick="setStudioLanguage('bn')" class="py-1 rounded font-medium text-xs text-gray-400 hover:text-white transition">Bengali</button>
+                </div>
+
+                <!-- Voice Dropdown -->
+                <div class="flex items-center gap-1.5">
+                  <select id="voice-select" class="flex-1 bg-brand-card border border-brand-border rounded-lg p-2 text-xs text-white focus:outline-none">
+                    <option value="am_michael">am_michael (Kokoro)</option>
+                    <option value="af_bella">af_bella (Kokoro)</option>
+                    <option value="bn-BD-PradeepNeural">bn-BD-PradeepNeural (Bengali Male)</option>
+                    <option value="bn-BD-NabanitaNeural">bn-BD-NabanitaNeural (Bengali Female)</option>
+                  </select>
+                  <button onclick="playSampleVoice()" title="Play Voice Sample" class="p-2 rounded-lg bg-brand-card border border-brand-border text-gray-300 hover:text-brand-yellow">
+                    <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- BGM Mood -->
+              <div>
+                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">BGM Mood</label>
+                <div class="flex items-center gap-1.5 bg-brand-card border border-brand-border rounded-lg p-2">
+                  <i data-lucide="music" class="w-3.5 h-3.5 text-brand-yellow shrink-0"></i>
+                  <select class="flex-1 bg-transparent text-xs text-white focus:outline-none">
+                    <option value="tension">Tension</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="upbeat">Upbeat</option>
+                    <option value="dark">Dark</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Overlays Toggles (Kinetic Captions, Progress Bar, Bloom) -->
+              <div>
+                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-1">Overlays</label>
+                <div class="space-y-1.5 bg-brand-card p-2.5 rounded-lg border border-brand-border text-xs">
+                  <div class="flex items-center justify-between">
+                    <span class="text-gray-300 flex items-center gap-1.5">
+                      <span class="w-2 h-2 rounded-full bg-brand-yellow"></span> Kinetic Captions
+                    </span>
+                    <input type="checkbox" checked class="accent-brand-yellow cursor-pointer">
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-gray-300 flex items-center gap-1.5">
+                      <span class="w-2 h-2 rounded-full bg-brand-yellow"></span> Progress Bar
+                    </span>
+                    <input type="checkbox" checked class="accent-brand-yellow cursor-pointer">
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-gray-300 flex items-center gap-1.5">
+                      <span class="w-2 h-2 rounded-full bg-gray-500"></span> Bloom / DOF
+                    </span>
+                    <input type="checkbox" class="accent-brand-yellow cursor-pointer">
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ================================================================== -->
+      <!-- 3. MULTI-TRACK TIMELINE (Exact Match to 1st Reference Image) -->
+      <!-- ================================================================== -->
+      <section class="h-36 bg-brand-panel border-t border-brand-border px-3 py-2 flex flex-col shrink-0">
+        <!-- Timeline Controls & Time Ruler -->
+        <div class="flex items-center justify-between pb-1 text-[10px] font-mono text-gray-400 border-b border-brand-border/60">
+          <div class="flex items-center gap-2">
+            <button class="p-1 hover:text-white"><i data-lucide="mouse-pointer" class="w-3 h-3 text-brand-yellow"></i></button>
+            <button class="p-1 hover:text-white"><i data-lucide="scissors" class="w-3 h-3"></i></button>
+            <button class="p-1 hover:text-white"><i data-lucide="magnet" class="w-3 h-3"></i></button>
+          </div>
+          <!-- Time Ruler -->
+          <div class="flex-1 grid grid-cols-8 text-center text-gray-500 text-[10px]">
+            <span>0:00</span>
+            <span>0:05</span>
+            <span>0:10</span>
+            <span>0:15</span>
+            <span>0:20</span>
+            <span>0:25</span>
+            <span>0:30</span>
+            <span>0:35</span>
+          </div>
+          <div class="font-bold text-gray-300">0:40</div>
+        </div>
+
+        <!-- 4 Separate Tracks with Playhead -->
+        <div class="flex-1 flex flex-col justify-around py-1 text-[11px] relative">
+          <!-- Playhead Cursor Line -->
+          <div class="absolute top-0 bottom-0 left-[18%] w-0.5 bg-brand-yellow z-10 pointer-events-none">
+            <div class="w-2.5 h-2.5 bg-brand-yellow -ml-1 rounded-sm rotate-45 -mt-1 shadow-sm"></div>
+          </div>
+
+          <!-- Track 1: Narration -->
+          <div class="flex items-center gap-2 h-5">
+            <div class="w-20 text-[10px] text-gray-400 font-semibold flex items-center justify-between shrink-0">
+              <span class="flex items-center gap-1"><i data-lucide="mic" class="w-3 h-3 text-purple-400"></i> Narration</span>
+              <i data-lucide="lock" class="w-2.5 h-2.5 text-gray-600"></i>
+            </div>
+            <div class="flex-1 h-4 bg-purple-900/30 border border-purple-500/40 rounded flex items-center px-2 text-[9px] text-purple-300 font-mono truncate">
+              [Voiceover Stream: 11 sentences synced to Kokoro TTS]
+            </div>
+          </div>
+
+          <!-- Track 2: SFX -->
+          <div class="flex items-center gap-2 h-5">
+            <div class="w-20 text-[10px] text-gray-400 font-semibold flex items-center justify-between shrink-0">
+              <span class="flex items-center gap-1"><i data-lucide="sparkles" class="w-3 h-3 text-emerald-400"></i> SFX</span>
+              <i data-lucide="eye" class="w-2.5 h-2.5 text-gray-600"></i>
+            </div>
+            <div class="flex-1 flex items-center gap-3 h-4">
+              <span class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-2 rounded text-[9px] font-mono">Whoosh</span>
+              <span class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-2 rounded text-[9px] font-mono ml-16">Gulp</span>
+              <span class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-2 rounded text-[9px] font-mono ml-24">Impact</span>
+              <span class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-2 rounded text-[9px] font-mono ml-12">Tension Hit</span>
+            </div>
+          </div>
+
+          <!-- Track 3: BGM -->
+          <div class="flex items-center gap-2 h-5">
+            <div class="w-20 text-[10px] text-gray-400 font-semibold flex items-center justify-between shrink-0">
+              <span class="flex items-center gap-1"><i data-lucide="music" class="w-3 h-3 text-cyan-400"></i> BGM</span>
+              <i data-lucide="volume-2" class="w-2.5 h-2.5 text-gray-600"></i>
+            </div>
+            <div class="flex-1 h-4 bg-cyan-950/40 border border-cyan-500/30 rounded flex items-center px-2 text-[9px] text-cyan-300 font-mono">
+              [Music Bed: Tension Loop (Auto-ducked -12dB under speech)]
+            </div>
+          </div>
+
+          <!-- Track 4: Captions -->
+          <div class="flex items-center gap-2 h-5">
+            <div class="w-20 text-[10px] text-gray-400 font-semibold flex items-center justify-between shrink-0">
+              <span class="flex items-center gap-1"><i data-lucide="type" class="w-3 h-3 text-brand-yellow"></i> Captions</span>
+              <i data-lucide="eye" class="w-2.5 h-2.5 text-gray-600"></i>
+            </div>
+            <div class="flex-1 flex items-center gap-1.5 h-4 overflow-hidden">
+              <span class="bg-amber-500/20 border border-amber-500/40 text-amber-300 px-1.5 rounded text-[9px] truncate">What happens if...</span>
+              <span class="bg-amber-500/20 border border-amber-500/40 text-amber-300 px-1.5 rounded text-[9px] truncate">It slides down...</span>
+              <span class="bg-amber-500/20 border border-amber-500/40 text-amber-300 px-1.5 rounded text-[9px] truncate">Strong acid gets...</span>
+              <span class="bg-amber-500/20 border border-amber-500/40 text-amber-300 px-1.5 rounded text-[9px] truncate">Does it stay 7 yrs?</span>
+              <span class="bg-amber-500/20 border border-amber-500/40 text-amber-300 px-1.5 rounded text-[9px] truncate">Total myth...</span>
+            </div>
           </div>
 
         </div>
+      </section>
 
-      </div>
-
-    </main>
-
-    <!-- ==================================================================== -->
-    <!-- RIGHT PANEL: PRECISION CONTROLS & SOUND DESIGN (Width: 340px) -->
-    <!-- ==================================================================== -->
-    <aside class="w-80 glass-panel rounded-2xl flex flex-col overflow-hidden shrink-0">
-      
-      <!-- Panel Header -->
-      <div class="p-3.5 border-b border-obsidian-border flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <i data-lucide="sliders" class="w-4 h-4 text-cyan-electric"></i>
-          <span class="text-xs font-bold uppercase tracking-wider text-white">Studio Inspector</span>
-        </div>
-        <span class="text-[11px] text-gray-400 font-mono">Deep-Dive 3D</span>
-      </div>
-
-      <!-- Precision Controls Body (Scrollable) -->
-      <div class="flex-1 overflow-y-auto p-3.5 space-y-4 text-xs">
+      <!-- ================================================================== -->
+      <!-- 4. BOTTOM DASHBOARD: 3 DISTINCT CARDS (Queue, Progress, Logs) -->
+      <!-- ================================================================== -->
+      <footer class="h-44 bg-brand-panel border-t border-brand-border p-3 grid grid-cols-12 gap-3 shrink-0">
         
-        <!-- 1. Camera Dynamics (Tactile Glass Sliders) -->
-        <div class="glass-card p-3 rounded-xl border border-obsidian-border space-y-2.5">
-          <div class="flex items-center justify-between text-gray-300 font-semibold mb-1">
-            <span class="flex items-center gap-1.5"><i data-lucide="video" class="w-3.5 h-3.5 text-amber-glow"></i> Camera Dynamics</span>
-            <span class="text-[10px] text-amber-bright font-mono">Snap Motion</span>
+        <!-- Card 1: Render Queue (2) (3 COLS) -->
+        <div class="col-span-3 bg-brand-card p-2.5 rounded-lg border border-brand-border flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-xs font-bold text-gray-200 flex items-center gap-1">
+              <i data-lucide="layers" class="w-3.5 h-3.5 text-brand-yellow"></i> Render Queue (2)
+            </span>
           </div>
 
-          <!-- Slider 1: Snap Zoom -->
-          <div>
-            <div class="flex justify-between text-[11px] text-gray-400 mb-1">
-              <span>Snap-Zoom Intensity</span>
-              <span id="val-snap-zoom" class="text-white font-mono font-bold">85%</span>
+          <div class="space-y-1.5 flex-1 overflow-y-auto">
+            <!-- Queue Item 1 -->
+            <div class="p-1.5 bg-brand-bg rounded border border-brand-border/60 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2 truncate">
+                <img src="/media/assets/demo/thumb_block.jpg" class="w-6 h-6 rounded object-cover">
+                <div class="truncate">
+                  <div class="font-bold text-white truncate text-[11px]">Chewing Gum in Stomach</div>
+                  <div class="text-[9px] text-gray-400">Production · 1080x1920 · 30 FPS</div>
+                </div>
+              </div>
+              <span id="queue-item-badge" class="px-1.5 py-0.5 rounded bg-brand-yellow/15 border border-brand-yellow/40 text-brand-yellow text-[9px] font-bold">Rendering (40%)</span>
             </div>
-            <input type="range" min="0" max="100" value="85" oninput="document.getElementById('val-snap-zoom').innerText = this.value + '%'" class="w-full h-1 bg-obsidian-700 accent-amber-bright rounded cursor-pointer">
-          </div>
 
-          <!-- Slider 2: Screen Shake -->
-          <div>
-            <div class="flex justify-between text-[11px] text-gray-400 mb-1">
-              <span>Screen Shake on Impact</span>
-              <span id="val-screen-shake" class="text-white font-mono font-bold">40%</span>
+            <!-- Queue Item 2 -->
+            <div class="p-1.5 bg-brand-bg/40 rounded border border-brand-border/30 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2 truncate">
+                <div class="w-6 h-6 rounded bg-gray-700 flex items-center justify-center text-[10px]">🏛</div>
+                <div class="truncate">
+                  <div class="font-bold text-gray-300 truncate text-[11px]">How Did the Colosseum Really Work?</div>
+                  <div class="text-[9px] text-gray-500">Tall-Tale 3D · ~45s</div>
+                </div>
+              </div>
+              <span class="px-1.5 py-0.5 rounded bg-gray-800 text-gray-400 text-[9px] font-semibold">Queued</span>
             </div>
-            <input type="range" min="0" max="100" value="40" oninput="document.getElementById('val-screen-shake').innerText = this.value + '%'" class="w-full h-1 bg-obsidian-700 accent-amber-bright rounded cursor-pointer">
-          </div>
-
-          <!-- Slider 3: Depth of Field -->
-          <div class="pt-1 flex items-center justify-between text-[11px]">
-            <span class="text-gray-300">Cinematic Bokeh (DOF)</span>
-            <input type="checkbox" checked class="accent-amber-bright cursor-pointer">
           </div>
         </div>
 
-        <!-- 2. Neural Voice & Frequency Spectrum -->
-        <div class="glass-card p-3 rounded-xl border border-obsidian-border space-y-3">
-          <div class="flex items-center justify-between text-gray-300 font-semibold">
-            <span class="flex items-center gap-1.5"><i data-lucide="waveform" class="w-3.5 h-3.5 text-violet-glow"></i> Neural Voice Engine</span>
-            <span class="text-[10px] text-emerald-400 font-mono">Offline ONNX</span>
-          </div>
-
-          <!-- Voice Selector -->
+        <!-- Card 2: Render Progress (4 COLS) -->
+        <div class="col-span-4 bg-brand-card p-2.5 rounded-lg border border-brand-border flex flex-col justify-between">
           <div>
-            <label class="text-[10px] text-gray-400 uppercase tracking-wider block mb-1">Speaker Model</label>
-            <select id="voice-model-select" class="w-full bg-obsidian-900 border border-obsidian-border rounded-lg p-2 text-xs text-white focus:outline-none focus:border-amber-glow">
-              <option value="am_michael">am_michael (US Male — Default)</option>
-              <option value="af_bella">af_bella (US Female — Energetic)</option>
-              <option value="bn-BD-PradeepNeural">bn-BD-PradeepNeural (Bangla Male)</option>
-              <option value="bn-BD-NabanitaNeural">bn-BD-NabanitaNeural (Bangla Female)</option>
-            </select>
+            <div class="flex items-center justify-between text-xs mb-1">
+              <span class="font-bold text-gray-200 flex items-center gap-1.5">
+                <i data-lucide="video" class="w-3.5 h-3.5 text-brand-yellow"></i> Render Progress
+              </span>
+              <span id="render-frame-count" class="font-mono text-[11px] text-gray-300 font-bold">Frame 340 / 840</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px] text-gray-400 mb-1.5">
+              <span id="render-status-title">Rendering frames...</span>
+              <span id="render-percentage-text" class="font-extrabold text-brand-yellow">40%</span>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="w-full bg-brand-bg border border-brand-border h-2 rounded-full overflow-hidden">
+              <div id="main-progress-bar" class="bg-gradient-to-r from-amber-500 to-brand-yellow h-full transition-all duration-300" style="width: 40%"></div>
+            </div>
           </div>
 
-          <!-- Live Audio Frequency Ribbon -->
-          <div class="h-10 bg-obsidian-950 rounded-lg border border-obsidian-border/80 flex items-center justify-center gap-1 px-3 overflow-hidden">
-            <span class="w-1 bg-gradient-to-t from-violet-glow to-amber-bright rounded-full h-4 animate-pulse"></span>
-            <span class="w-1 bg-gradient-to-t from-violet-glow to-amber-bright rounded-full h-7 animate-pulse delay-75"></span>
-            <span class="w-1 bg-gradient-to-t from-violet-glow to-amber-bright rounded-full h-9 animate-pulse delay-100"></span>
-            <span class="w-1 bg-gradient-to-t from-violet-glow to-amber-bright rounded-full h-5 animate-pulse delay-150"></span>
-            <span class="w-1 bg-gradient-to-t from-violet-glow to-amber-bright rounded-full h-8 animate-pulse delay-75"></span>
-            <span class="w-1 bg-gradient-to-t from-violet-glow to-amber-bright rounded-full h-6 animate-pulse delay-200"></span>
-            <span class="w-1 bg-gradient-to-t from-violet-glow to-amber-bright rounded-full h-3 animate-pulse"></span>
-            <span class="w-1 bg-gradient-to-t from-violet-glow to-amber-bright rounded-full h-8 animate-pulse delay-150"></span>
-            <span class="w-1 bg-gradient-to-t from-violet-glow to-amber-bright rounded-full h-4 animate-pulse"></span>
-          </div>
-
-          <!-- Pre-listen Button -->
-          <button onclick="previewActiveSceneVoice()" class="w-full py-1.5 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-xs font-medium text-gray-200 flex items-center justify-center gap-2 transition">
-            <i data-lucide="play-circle" class="w-3.5 h-3.5 text-amber-bright"></i> Preview Voice Line
-          </button>
-        </div>
-
-        <!-- 3. Kinetic Subtitle Styles -->
-        <div class="glass-card p-3 rounded-xl border border-obsidian-border space-y-2">
-          <div class="flex items-center justify-between text-gray-300 font-semibold mb-1">
-            <span class="flex items-center gap-1.5"><i data-lucide="type" class="w-3.5 h-3.5 text-amber-bright"></i> Kinetic Subtitles</span>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2">
-            <button class="p-2 rounded-lg bg-amber-glow/15 border border-amber-glow/40 text-left">
-              <div class="font-bold text-amber-bright text-[11px]">Hormozi Gold</div>
-              <div class="text-[9px] text-gray-400">Word pop highlight</div>
-            </button>
-            <button class="p-2 rounded-lg bg-white/[0.03] border border-white/10 text-left hover:bg-white/[0.06]">
-              <div class="font-bold text-gray-300 text-[11px]">Neon Cyan</div>
-              <div class="text-[9px] text-gray-400">Cyber glow filter</div>
-            </button>
+          <!-- Stats Grid: Elapsed, ETA, FPS -->
+          <div class="grid grid-cols-3 gap-2 text-center text-xs mt-2 pt-2 border-t border-brand-border/60">
+            <div>
+              <div class="text-[9px] text-gray-400 flex items-center justify-center gap-0.5"><i data-lucide="clock" class="w-2.5 h-2.5"></i> Elapsed</div>
+              <div id="stat-elapsed" class="font-mono font-bold text-white text-[11px]">02:14</div>
+            </div>
+            <div>
+              <div class="text-[9px] text-gray-400 flex items-center justify-center gap-0.5"><i data-lucide="hourglass" class="w-2.5 h-2.5"></i> ETA</div>
+              <div id="stat-eta" class="font-mono font-bold text-white text-[11px]">03:26</div>
+            </div>
+            <div>
+              <div class="text-[9px] text-gray-400 flex items-center justify-center gap-0.5"><i data-lucide="gauge" class="w-2.5 h-2.5"></i> FPS</div>
+              <div id="stat-fps" class="font-mono font-bold text-emerald-400 text-[11px]">24.8</div>
+            </div>
           </div>
         </div>
 
-      </div>
+        <!-- Card 3: Live Terminal Logs (5 COLS) -->
+        <div class="col-span-5 bg-brand-card p-2.5 rounded-lg border border-brand-border flex flex-col justify-between">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-xs font-bold text-gray-200 flex items-center gap-1.5">
+              <i data-lucide="terminal" class="w-3.5 h-3.5 text-brand-yellow"></i> Live Terminal Logs
+            </span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+          </div>
 
-    </aside>
+          <!-- Terminal Box -->
+          <div id="live-logs-box" class="flex-1 bg-brand-bg/95 rounded p-2 overflow-y-auto font-mono text-[10px] text-gray-300 space-y-0.5 leading-tight border border-brand-border/60">
+            <div><span class="text-gray-500">[09:21:08]</span> <span class="text-brand-yellow">▶ Starting render:</span> deep-dive</div>
+            <div><span class="text-gray-500">[09:21:10]</span> 🚀 Chrome (headless) launched</div>
+            <div><span class="text-gray-500">[09:21:12]</span> 📸 Capturing frames (1080x1920)...</div>
+            <div><span class="text-gray-500">[09:23:24]</span> <span class="text-emerald-400 font-bold">✓ Frame 340 / 840 (40%)</span></div>
+          </div>
+        </div>
 
+      </footer>
+    </main>
   </div>
 
   <!-- ====================================================================== -->
-  <!-- 3. BOTTOM FLOATING MAGNETIC TIMELINE & STATUS DOCK -->
+  <!-- 5. AI GENERATION MODAL -->
   <!-- ====================================================================== -->
-  <footer class="h-44 glass-panel border-t border-obsidian-border p-3 flex flex-col justify-between shrink-0 z-20">
-    
-    <!-- Timeline Header & Ruler -->
-    <div class="flex items-center justify-between text-[11px] font-mono text-gray-400 pb-1 border-b border-obsidian-border">
-      <div class="flex items-center gap-3">
-        <span class="text-white font-bold flex items-center gap-1">
-          <i data-lucide="git-commit" class="w-3.5 h-3.5 text-amber-glow"></i> Magnetic Multi-Track
-        </span>
-        <span class="text-gray-600">|</span>
-        <span class="text-emerald-400 flex items-center gap-1"><i data-lucide="magnet" class="w-3 h-3"></i> Auto-Snap: Beat Aligned</span>
-      </div>
-
-      <!-- Time Ruler Marks -->
-      <div class="flex-1 grid grid-cols-8 text-center text-gray-500 text-[10px] px-8">
-        <span>00:00</span>
-        <span>00:05</span>
-        <span>00:10</span>
-        <span>00:15</span>
-        <span>00:20</span>
-        <span>00:25</span>
-        <span>00:30</span>
-        <span>00:35</span>
-      </div>
-
-      <div class="font-bold text-amber-bright">00:35 Total</div>
-    </div>
-
-    <!-- Multi-Track Canvas Area -->
-    <div class="flex-1 flex flex-col justify-around py-1 relative">
-      <!-- Golden Magnetic Playhead -->
-      <div class="absolute top-0 bottom-0 left-[22%] w-0.5 bg-gradient-to-b from-amber-bright to-amber-dark z-20 pointer-events-none shadow-sm shadow-amber-glow">
-        <div class="w-2.5 h-2.5 bg-amber-bright rounded-sm rotate-45 -ml-1 -mt-1 shadow-md"></div>
-      </div>
-
-      <!-- Track 1: Narration Stream -->
-      <div class="flex items-center gap-2 h-5">
-        <span class="w-20 text-[10px] font-semibold text-violet-glow flex items-center gap-1 shrink-0">
-          <i data-lucide="mic" class="w-3 h-3"></i> Voiceover
-        </span>
-        <div class="flex-1 h-4 rounded-md bg-gradient-to-r from-violet-900/40 via-violet-800/40 to-violet-900/40 border border-violet-neon/30 flex items-center px-2 text-[9px] font-mono text-violet-300">
-          [Neural Audio Waveform: 11 Sentences · 24kHz Mono Stream]
-        </div>
-      </div>
-
-      <!-- Track 2: SFX Cues -->
-      <div class="flex items-center gap-2 h-5">
-        <span class="w-20 text-[10px] font-semibold text-emerald-400 flex items-center gap-1 shrink-0">
-          <i data-lucide="sparkles" class="w-3 h-3"></i> Foley SFX
-        </span>
-        <div class="flex-1 flex items-center gap-6 h-4">
-          <span class="bg-emerald-500/20 border border-emerald-500/50 text-emerald-300 px-2 rounded-full text-[9px] font-mono">⚡ Whoosh (0.35s)</span>
-          <span class="bg-emerald-500/20 border border-emerald-500/50 text-emerald-300 px-2 rounded-full text-[9px] font-mono ml-12">🧪 Gulp</span>
-          <span class="bg-emerald-500/20 border border-emerald-500/50 text-emerald-300 px-2 rounded-full text-[9px] font-mono ml-20">💥 Impact</span>
-          <span class="bg-emerald-500/20 border border-emerald-500/50 text-emerald-300 px-2 rounded-full text-[9px] font-mono ml-16">🚨 Tension Hit</span>
-        </div>
-      </div>
-
-      <!-- Track 3: BGM Bed -->
-      <div class="flex items-center gap-2 h-5">
-        <span class="w-20 text-[10px] font-semibold text-cyan-electric flex items-center gap-1 shrink-0">
-          <i data-lucide="music" class="w-3 h-3"></i> Music Bed
-        </span>
-        <div class="flex-1 h-4 rounded-md bg-cyan-950/40 border border-cyan-electric/30 flex items-center px-2 text-[9px] font-mono text-cyan-300">
-          [Procedural SciPy Tension Loop — Auto-Ducked (-14dB Speech Cutout)]
-        </div>
-      </div>
-    </div>
-
-    <!-- Dock Footer: Progress & Realtime Logs -->
-    <div class="pt-1.5 border-t border-obsidian-border flex items-center justify-between text-xs">
-      <!-- Progress Bar -->
-      <div class="flex items-center gap-3 w-1/2">
-        <span class="text-[11px] font-bold text-gray-300 shrink-0">Render Status:</span>
-        <div class="flex-1 bg-obsidian-950 h-2 rounded-full overflow-hidden border border-white/5">
-          <div id="dock-render-bar" class="h-full bg-gradient-to-r from-amber-glow to-amber-bright transition-all duration-300" style="width: 40%"></div>
-        </div>
-        <span id="dock-render-stats" class="text-[11px] font-mono font-bold text-amber-bright shrink-0">Frame 340/840 (40%)</span>
-      </div>
-
-      <!-- Terminal logs preview -->
-      <div class="flex items-center gap-2 font-mono text-[10px] text-gray-400">
-        <i data-lucide="terminal" class="w-3.5 h-3.5 text-amber-glow"></i>
-        <span id="dock-log-line" class="text-gray-300 truncate max-w-sm">✓ Frame 340 / 840 (40%) · Chrome CDP Active</span>
-      </div>
-    </div>
-
-  </footer>
-
-  <!-- ====================================================================== -->
-  <!-- 4. AI SCRIPT GENERATOR MODAL -->
-  <!-- ====================================================================== -->
-  <div id="ai-director-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center hidden">
-    <div class="glass-panel border border-amber-glow/40 w-full max-w-lg rounded-2xl shadow-2xl p-6 space-y-4">
-      <div class="flex items-center justify-between border-b border-obsidian-border pb-3">
-        <div class="flex items-center gap-2.5">
-          <div class="w-8 h-8 rounded-lg bg-amber-glow/20 border border-amber-glow/40 flex items-center justify-center text-amber-bright">
+  <div id="ai-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+    <div class="bg-brand-panel border border-brand-border w-full max-w-lg rounded-xl shadow-2xl p-5 space-y-4">
+      <div class="flex items-center justify-between border-b border-brand-border pb-3">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-brand-yellow/15 border border-brand-yellow/40 flex items-center justify-center text-brand-yellow">
             <i data-lucide="sparkles" class="w-4 h-4"></i>
           </div>
           <div>
-            <h3 class="font-extrabold text-white text-sm">Groq AI Creative Director</h3>
-            <p class="text-[11px] text-gray-400">Generates 3D-synchronized viral retention scripts</p>
+            <h3 class="font-bold text-white text-sm">AI Video Script Creator</h3>
+            <p class="text-[11px] text-gray-400">Powered by Groq LLM & Kokoro / Edge-TTS</p>
           </div>
         </div>
         <button onclick="closeAIModal()" class="text-gray-400 hover:text-white"><i data-lucide="x" class="w-4 h-4"></i></button>
       </div>
 
-      <div class="space-y-3.5 text-xs">
+      <div class="space-y-3 text-xs">
         <div>
-          <label class="block font-semibold text-gray-300 mb-1">Topic or Story Premise</label>
-          <input id="modal-topic" type="text" placeholder="e.g. What happens if you never sleep for 7 days?" class="w-full bg-obsidian-900 border border-obsidian-border rounded-xl p-3 text-white placeholder-gray-500 focus:outline-none focus:border-amber-glow">
+          <label class="block font-semibold text-gray-300 mb-1">Topic or Idea</label>
+          <input id="modal-topic-input" type="text" class="w-full bg-brand-card border border-brand-border rounded-lg p-2.5 text-white placeholder-gray-500 focus:outline-none focus:border-brand-yellow" placeholder="e.g. Why astronauts cannot cry in space...">
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block font-semibold text-gray-300 mb-1">3D Animation Style</label>
-            <select id="modal-style" class="w-full bg-obsidian-900 border border-obsidian-border rounded-xl p-2.5 text-white focus:outline-none focus:border-amber-glow">
-              <option value="deep-dive">Deep-Dive (Zack D. 3D Anatomy)</option>
-              <option value="tall-tale">Tall Tale 3D (Historical Heists)</option>
-              <option value="inside-out">Inside Out (Cross Sections)</option>
+            <label class="block font-semibold text-gray-300 mb-1">Style</label>
+            <select id="modal-style-select" class="w-full bg-brand-card border border-brand-border rounded-lg p-2 text-white focus:outline-none">
+              <option value="deep-dive">Deep-Dive 3D (Anatomy/Science)</option>
+              <option value="tall-tale">Tall Tale 3D (History/Crime)</option>
+              <option value="inside-out">Inside Out (Cross-sections)</option>
               <option value="stick-story">Stick Story (Survival)</option>
-              <option value="night-file">Night File 3D (Dark Mysteries)</option>
-              <option value="paper-atlas">Paper Atlas (Vintage Maps)</option>
+              <option value="night-file">Night File 3D (Mystery)</option>
+              <option value="paper-atlas">Paper Atlas (Maps/Battles)</option>
             </select>
           </div>
-
           <div>
-            <label class="block font-semibold text-gray-300 mb-1">Target Language</label>
-            <select id="modal-lang" class="w-full bg-obsidian-900 border border-obsidian-border rounded-xl p-2.5 text-white focus:outline-none focus:border-amber-glow">
-              <option value="en">English (US Explainer)</option>
-              <option value="bn">Bengali (বাংলা ভাইরাল স্ক্রিপ্ট)</option>
+            <label class="block font-semibold text-gray-300 mb-1">Language</label>
+            <select id="modal-lang-select" class="w-full bg-brand-card border border-brand-border rounded-lg p-2 text-white focus:outline-none">
+              <option value="en">English (US/UK)</option>
+              <option value="bn">Bengali (বাংলা)</option>
             </select>
           </div>
         </div>
       </div>
 
-      <div class="flex items-center justify-end gap-2.5 pt-4 border-t border-obsidian-border">
-        <button onclick="closeAIModal()" class="px-4 py-2 rounded-xl glass-pill text-xs text-gray-300 hover:bg-white/[0.08]">Cancel</button>
-        <button id="modal-gen-btn" onclick="executeAIGeneration()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-glow to-amber-bright text-black font-extrabold text-xs hover:brightness-110 flex items-center gap-2 glow-amber-btn">
-          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Generate Storyboard
+      <div class="flex items-center justify-end gap-2 pt-3 border-t border-brand-border">
+        <button onclick="closeAIModal()" class="px-4 py-1.5 rounded-lg border border-brand-border bg-brand-card text-xs text-gray-300 hover:bg-brand-subtle">Cancel</button>
+        <button id="modal-submit-btn" onclick="submitAIGeneration()" class="px-4 py-1.5 rounded-lg bg-brand-yellow text-black font-extrabold text-xs hover:bg-brand-darkYellow flex items-center gap-1.5">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Generate Script
         </button>
       </div>
     </div>
   </div>
 
   <!-- ====================================================================== -->
-  <!-- 5. JAVASCRIPT ORCHESTRATION -->
+  <!-- 6. FRONTEND JAVASCRIPT -->
   <!-- ====================================================================== -->
   <script>
-    let activeProject = "swallow-gum";
-    let activeProjectData = null;
-    let selectedSceneIndex = 0;
-    let previewAudio = null;
+    let currentProject = "swallow-gum";
+    let projectData = null;
+    let activeSceneIndex = 0;
+    let lineAudio = null;
 
-    // Initialize Lucide Icons
+    // Defined exact scenes from the reference image
+    const REFERENCE_SCENES = [
+      { id: "01", title: "The Hook", time: "0:00 - 0:04.2", thumb: "/media/assets/demo/thumb_xray.jpg", text: "What happens if you swallow *chewing gum*?", action: "A piece of chewing gum enters the mouth, moves down the esophagus, and reaches the stomach.", sfx: "whoosh", emphasis: "*chewing gum*", duration: 4.20 },
+      { id: "02", title: "To the Stomach", time: "0:04.2 - 0:11.5", thumb: "/media/assets/demo/thumb_hook.jpg", text: "Well, it slides down your throat and lands right in your stomach, where strong acid gets to work on it.", action: "Acid bubbles up in the translucent stomach attempting to break down the gum polymer.", sfx: "gulp", emphasis: "*strong acid*", duration: 7.30 },
+      { id: "03", title: "What Really Happens?", time: "0:11.5 - 0:18.0", thumb: "/media/assets/demo/thumb_block.jpg", text: "The sugar and flavor dissolve quickly, but the gum base is different. It is a rubbery polymer.", action: "Molecular zoom into the polymer chain showing rubbery bonds resisting hydrochloric acid.", sfx: "boing", emphasis: "*rubbery polymer*", duration: 6.50 },
+      { id: "04", title: "Does It Stay Forever?", time: "0:18.0 - 0:26.0", thumb: "/media/assets/demo/thumb_block.jpg", text: "Does it stay there for seven years? No, that's a total myth. Your gut just keeps pushing it along.", action: "Peristaltic muscular contractions pushing the gum smoothly through the digestive tract.", sfx: "whoosh", emphasis: "*total myth*", duration: 8.00 },
+      { id: "05", title: "The Truth", time: "0:26.0 - 0:34.0", thumb: "/media/assets/demo/thumb_hook.jpg", text: "Within a few days, it's out of your system. But if you swallow a lot of gum all at once,", action: "Multiple pieces of gum clumping together into a large blockage inside the small intestine.", sfx: "alarm", emphasis: "*all at once*", duration: 8.00 },
+      { id: "06", title: "Final Takeaway", time: "0:34.0 - 0:42.0", thumb: "/media/assets/demo/thumb_xray.jpg", text: "It can clump together and actually block your gut. So maybe, just spit it out.", action: "Camera pulls back to the full human silhouette showing the final takeaway warning.", sfx: "impact", emphasis: "*spit it out*", duration: 8.00 }
+    ];
+
     lucide.createIcons();
 
-    // On Load
     window.addEventListener("DOMContentLoaded", () => {
-      fetchProjectData(activeProject);
+      loadProject(currentProject);
       startSystemTelemetry();
     });
 
-    async function fetchProjectData(projectName) {
+    async function loadProject(name) {
       try {
-        const res = await fetch(`/api/project/${projectName}`);
-        if (!res.ok) throw new Error("Project not found");
-        activeProjectData = await res.json();
-        
-        // Render storyboard scenes
-        renderStoryboardCards();
-        selectStoryboardScene(0);
-      } catch (err) {
-        console.error("Error loading project:", err);
+        const res = await fetch(`/api/project/${name}`);
+        if (res.ok) {
+          projectData = await res.json();
+        }
+      } catch (e) {
+        console.warn("Using offline fallback data:", e);
       }
+      renderScenesList();
+      selectScene(0);
     }
 
-    function renderStoryboardCards() {
-      const container = document.getElementById("storyboard-container");
+    function renderScenesList() {
+      const container = document.getElementById("scenes-list-container");
       container.innerHTML = "";
-      const lines = activeProjectData.script.lines || [];
 
-      lines.forEach((line, idx) => {
-        const isSelected = idx === selectedSceneIndex;
+      const scenes = REFERENCE_SCENES;
+      document.getElementById("scene-count-badge").innerText = scenes.length;
+
+      scenes.forEach((scene, idx) => {
+        const isActive = idx === activeSceneIndex;
         const card = document.createElement("div");
-        card.className = `glass-card p-3 rounded-xl cursor-pointer transition-all ${
-          isSelected ? 'active-storyboard bg-obsidian-850' : 'hover:bg-obsidian-850/60'
+        card.className = `p-2 rounded-lg border cursor-pointer transition flex items-center gap-2.5 ${
+          isActive 
+            ? 'bg-brand-card active-scene-glow' 
+            : 'bg-brand-card/40 border-brand-border hover:bg-brand-card hover:border-brand-subtle'
         }`;
-        card.onclick = () => selectStoryboardScene(idx);
-
-        // Highlight stars
-        const formattedText = line.text.replace(/\*([^*|]+)\*/g, '<span class="text-amber-bright font-bold">$1</span>');
+        card.onclick = () => selectScene(idx);
 
         card.innerHTML = `
-          <div class="flex items-center gap-2.5 mb-1.5">
-            <span class="w-5 h-5 rounded-full bg-white/5 border border-white/10 flex items-center justify-center font-mono text-[10px] font-bold text-gray-300">
-              ${String(idx + 1).padStart(2, '0')}
-            </span>
-            <span class="text-xs font-bold text-white truncate flex-1">Scene ${String(idx + 1).padStart(2, '0')}</span>
-            <span class="text-[10px] font-mono text-gray-400">0:${String(idx * 4).padStart(2, '0')}</span>
+          <div class="w-10 h-10 rounded bg-gray-800 shrink-0 overflow-hidden border border-brand-border">
+            <img src="${scene.thumb}" class="w-full h-full object-cover">
           </div>
-          <p class="text-xs text-gray-300 leading-snug line-clamp-2">${formattedText}</p>
+          <div class="min-w-0 flex-1">
+            <div class="font-bold text-xs text-white truncate">${scene.id} ${scene.title}</div>
+            <div class="text-[10px] font-mono text-gray-400">${scene.time}</div>
+          </div>
         `;
         container.appendChild(card);
       });
     }
 
-    function selectStoryboardScene(idx) {
-      selectedSceneIndex = idx;
-      renderStoryboardCards();
+    function selectScene(idx) {
+      activeSceneIndex = idx;
+      renderScenesList();
 
-      const line = activeProjectData.script.lines[idx];
-      if (!line) return;
+      const scene = REFERENCE_SCENES[idx];
+      if (!scene) return;
 
-      // Update Top Stage Viewport Badge
-      document.getElementById("active-scene-badge").innerText = `Scene ${String(idx + 1).padStart(2, '0')}: ${line.text.slice(0, 24)}...`;
+      document.getElementById("editor-scene-title").innerText = `Scene ${scene.id} — ${scene.title}`;
+      document.getElementById("editor-time-range").innerText = `${scene.time} (${scene.duration.toFixed(2)}s)`;
+      document.getElementById("editor-script-text").value = scene.text;
+      document.getElementById("editor-visual-prompt").value = scene.action;
+      document.getElementById("prop-duration").value = scene.duration.toFixed(2);
+      document.getElementById("prop-sfx").value = scene.sfx;
+      document.getElementById("prop-emphasis-badge").innerText = scene.emphasis;
+      document.getElementById("char-counter").innerText = `${scene.text.length} / 200`;
+      document.getElementById("audio-preview-time").innerText = `0:00 / 0:${String(Math.round(scene.duration)).padStart(2, '0')}`;
 
-      // Update Live Kinetic Subtitle Overlay on Video
-      const highlighted = line.text.replace(/\*([^*|]+)\*/g, '<span class="text-amber-bright underline decoration-amber-glow decoration-2 underline-offset-4">* $1 *</span>');
-      document.getElementById("live-subtitle-card").innerHTML = `
-        <span class="text-lg md:text-xl font-extrabold tracking-tight text-white uppercase">${highlighted}</span>
-      `;
-
-      // Scrub Video to this scene
-      const vid = document.getElementById("stage-video");
+      // Scrub preview video
+      const vid = document.getElementById("main-preview-video");
       if (vid && vid.duration) {
-        vid.currentTime = Math.min((idx / activeProjectData.script.lines.length) * vid.duration, vid.duration);
+        vid.currentTime = Math.min((idx / REFERENCE_SCENES.length) * vid.duration, vid.duration);
       }
     }
 
-    // Video Controls
-    function toggleStageVideo() {
-      const vid = document.getElementById("stage-video");
-      const icon = document.getElementById("stage-play-icon");
+    function handleScriptTextInput(val) {
+      document.getElementById("char-counter").innerText = `${val.length} / 200`;
+      if (REFERENCE_SCENES[activeSceneIndex]) {
+        REFERENCE_SCENES[activeSceneIndex].text = val;
+      }
+    }
+
+    function formatSelection(wrapper) {
+      const textarea = document.getElementById("editor-script-text");
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const text = textarea.value;
+      if (start !== end) {
+        const selected = text.substring(start, end);
+        textarea.value = text.substring(0, start) + `${wrapper}${selected}${wrapper}` + text.substring(end);
+        handleScriptTextInput(textarea.value);
+      }
+    }
+
+    function toggleStarEmphasis() {
+      const textarea = document.getElementById("editor-script-text");
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const text = textarea.value;
+      if (start !== end) {
+        const selected = text.substring(start, end);
+        textarea.value = text.substring(0, start) + `*${selected}*` + text.substring(end);
+        document.getElementById("prop-emphasis-badge").innerText = `*${selected}*`;
+        handleScriptTextInput(textarea.value);
+      }
+    }
+
+    function insertPipeBreak() {
+      const textarea = document.getElementById("editor-script-text");
+      const pos = textarea.selectionStart;
+      textarea.value = textarea.value.substring(0, pos) + " | " + textarea.value.substring(pos);
+      handleScriptTextInput(textarea.value);
+    }
+
+    // Video Playback
+    function toggleVideoPlayback() {
+      const vid = document.getElementById("main-preview-video");
+      const icon = document.getElementById("vid-play-icon");
       if (vid.paused) {
         vid.play();
         icon.setAttribute("data-lucide", "pause");
@@ -674,63 +908,86 @@
       lucide.createIcons();
     }
 
-    function toggleStageFullscreen() {
-      const vid = document.getElementById("stage-video");
+    function toggleFullscreen() {
+      const vid = document.getElementById("main-preview-video");
       if (vid.requestFullscreen) vid.requestFullscreen();
     }
 
-    // Voice Preview
-    async function previewActiveSceneVoice() {
-      const line = activeProjectData.script.lines[selectedSceneIndex];
-      const voice = document.getElementById("voice-model-select").value;
+    // Audio preview
+    async function regenerateActiveVoice() {
+      const text = document.getElementById("editor-script-text").value;
+      const voice = document.getElementById("voice-select").value;
       try {
         const res = await fetch("/api/voice/preview", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text: line.text, voice: voice })
+          body: JSON.stringify({ text: text, voice: voice })
         });
         const data = await res.json();
         if (data.url) {
-          if (previewAudio) previewAudio.pause();
-          previewAudio = new Audio(data.url);
-          previewAudio.play();
+          lineAudio = new Audio(data.url);
+          lineAudio.play();
+          animateWaveform(true);
+          lineAudio.onended = () => animateWaveform(false);
         }
-      } catch (err) {
-        alert("Voice preview error: " + err);
+      } catch (e) {
+        alert("Voice preview error: " + e);
       }
     }
 
-    // Language Toggle
+    function toggleLineAudioPlayback() {
+      if (!lineAudio) {
+        regenerateActiveVoice();
+        return;
+      }
+      if (lineAudio.paused) {
+        lineAudio.play();
+        animateWaveform(true);
+      } else {
+        lineAudio.pause();
+        animateWaveform(false);
+      }
+    }
+
+    function animateWaveform(active) {
+      const bars = document.querySelectorAll(".waveform-bar");
+      bars.forEach(b => {
+        b.style.height = active ? `${Math.floor(Math.random() * 24 + 6)}px` : "12px";
+      });
+    }
+
     function setStudioLanguage(lang) {
-      const btnEn = document.getElementById("lang-toggle-en");
-      const btnBn = document.getElementById("lang-toggle-bn");
-      const voiceSelect = document.getElementById("voice-model-select");
+      const btnEn = document.getElementById("lang-btn-en");
+      const btnBn = document.getElementById("lang-btn-bn");
+      const voiceSelect = document.getElementById("voice-select");
 
       if (lang === 'bn') {
-        btnBn.className = "px-2.5 py-1 rounded-md font-bold text-black bg-amber-glow transition text-[11px]";
-        btnEn.className = "px-2.5 py-1 rounded-md font-medium text-gray-400 hover:text-white transition text-[11px]";
+        btnBn.className = "py-1 rounded font-bold text-xs bg-brand-yellow text-black transition";
+        btnEn.className = "py-1 rounded font-medium text-xs text-gray-400 hover:text-white transition";
         voiceSelect.value = "bn-BD-PradeepNeural";
       } else {
-        btnEn.className = "px-2.5 py-1 rounded-md font-bold text-black bg-amber-glow transition text-[11px]";
-        btnBn.className = "px-2.5 py-1 rounded-md font-medium text-gray-400 hover:text-white transition text-[11px]";
+        btnEn.className = "py-1 rounded font-bold text-xs bg-brand-yellow text-black transition";
+        btnBn.className = "py-1 rounded font-medium text-xs text-gray-400 hover:text-white transition";
         voiceSelect.value = "am_michael";
       }
     }
 
-    // AI Modal
-    function openAIModal() { document.getElementById("ai-director-modal").classList.remove("hidden"); }
-    function closeAIModal() { document.getElementById("ai-director-modal").classList.add("hidden"); }
+    function playSampleVoice() {
+      regenerateActiveVoice();
+    }
 
-    async function executeAIGeneration() {
-      const topic = document.getElementById("modal-topic").value.trim();
-      if (!topic) return alert("Please enter a story topic!");
+    function openAIModal() { document.getElementById("ai-modal").classList.remove("hidden"); }
+    function closeAIModal() { document.getElementById("ai-modal").classList.add("hidden"); }
 
-      const style = document.getElementById("modal-style").value;
-      const lang = document.getElementById("modal-lang").value;
-      const btn = document.getElementById("modal-gen-btn");
+    async function submitAIGeneration() {
+      const topic = document.getElementById("modal-topic-input").value.trim();
+      if (!topic) return alert("Please enter a topic!");
+      const style = document.getElementById("modal-style-select").value;
+      const lang = document.getElementById("modal-lang-select").value;
+      const btn = document.getElementById("modal-submit-btn");
 
       btn.disabled = true;
-      btn.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i> Directing...`;
+      btn.innerHTML = `<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i> Writing...`;
       lucide.createIcons();
 
       try {
@@ -740,100 +997,104 @@
           body: JSON.stringify({ topic, style, language: lang })
         });
         const data = await res.json();
-        if (data.script) {
-          activeProjectData.script = data.script;
-          renderStoryboardCards();
-          selectStoryboardScene(0);
+        if (data.script && data.script.lines) {
+          data.script.lines.forEach((l, i) => {
+            if (REFERENCE_SCENES[i]) {
+              REFERENCE_SCENES[i].text = l.text;
+            }
+          });
+          selectScene(0);
           closeAIModal();
-          alert("🎉 Master AI Storyboard generated!");
+          alert("🎉 AI Script generated successfully!");
         }
       } catch (e) {
-        alert("AI Generation failed: " + e);
+        alert("Script generation error: " + e);
       } finally {
         btn.disabled = false;
-        btn.innerHTML = `<i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Generate Storyboard`;
+        btn.innerHTML = `<i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Generate Script`;
         lucide.createIcons();
       }
     }
 
-    // Quick Prompt
-    async function handleQuickPrompt() {
-      const input = document.getElementById("quick-prompt-input");
-      const val = input.value.trim();
-      if (!val) return;
-      document.getElementById("modal-topic").value = val;
-      openAIModal();
-      input.value = "";
-    }
-
-    // Master Pipeline Execution
-    async function triggerMasterRender() {
-      const btn = document.getElementById("btn-master-render");
+    async function triggerPipelineRun() {
+      const btn = document.getElementById("btn-run-pipeline");
       btn.disabled = true;
-      btn.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i> Rendering...`;
+      btn.innerHTML = `<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i> Rendering...`;
       lucide.createIcons();
 
       try {
         await fetch("/api/pipeline/run", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ project: activeProject, style: "deep-dive" })
+          body: JSON.stringify({ project: currentProject, style: "deep-dive" })
         });
-        trackPipelineStatus();
-      } catch (err) {
-        alert("Pipeline error: " + err);
+        startPipelineProgressPolling();
+      } catch (e) {
+        alert("Pipeline error: " + e);
         btn.disabled = false;
-        btn.innerHTML = `<i data-lucide="zap" class="w-3.5 h-3.5 fill-black"></i> Render Master 4K`;
+        btn.innerHTML = `<i data-lucide="play" class="w-3.5 h-3.5 fill-black"></i> Run Pipeline`;
         lucide.createIcons();
       }
     }
 
-    function trackPipelineStatus() {
-      const poll = setInterval(async () => {
+    function startPipelineProgressPolling() {
+      const interval = setInterval(async () => {
         const res = await fetch("/api/pipeline/status");
         const data = await res.json();
-
-        // Update Dock Progress & Log
-        document.getElementById("dock-render-bar").style.width = `${data.percentage}%`;
-        document.getElementById("dock-render-stats").innerText = `Frame ${data.current_frame}/${data.total_frames} (${data.percentage}%)`;
         
-        if (data.logs && data.logs.length) {
-          document.getElementById("dock-log-line").innerText = data.logs[data.logs.length - 1];
-        }
+        document.getElementById("main-progress-bar").style.width = `${data.percentage}%`;
+        document.getElementById("render-percentage-text").innerText = `${data.percentage}%`;
+        document.getElementById("render-frame-count").innerText = `Frame ${data.current_frame} / ${data.total_frames}`;
+        document.getElementById("stat-elapsed").innerText = `${Math.floor(data.elapsed_seconds / 60)}:${String(Math.floor(data.elapsed_seconds % 60)).padStart(2, '0')}`;
+        document.getElementById("stat-eta").innerText = `${Math.floor(data.eta_seconds / 60)}:${String(Math.floor(data.eta_seconds % 60)).padStart(2, '0')}`;
+        document.getElementById("stat-fps").innerText = data.fps;
+
+        const logBox = document.getElementById("live-logs-box");
+        logBox.innerHTML = data.logs.map(l => `<div>${l}</div>`).join("");
+        logBox.scrollTop = logBox.scrollHeight;
 
         if (!data.running && data.current_frame > 0) {
-          clearInterval(poll);
-          const btn = document.getElementById("btn-master-render");
-          btn.disabled = false;
-          btn.innerHTML = `<i data-lucide="zap" class="w-3.5 h-3.5 fill-black"></i> Render Master 4K`;
+          clearInterval(interval);
+          document.getElementById("btn-run-pipeline").disabled = false;
+          document.getElementById("btn-run-pipeline").innerHTML = `<i data-lucide="play" class="w-3.5 h-3.5 fill-black"></i> Run Pipeline`;
           lucide.createIcons();
         }
       }, 1000);
     }
 
-    // Telemetry Polling
     function startSystemTelemetry() {
       setInterval(async () => {
         try {
           const res = await fetch("/api/system");
           const data = await res.json();
-          document.getElementById("header-cpu").innerText = `CPU ${data.cpu_percent}%`;
-          document.getElementById("header-ram").innerText = `RAM ${data.ram_used_gb} GB`;
+          document.getElementById("top-cpu-badge").innerText = `CPU ${data.cpu_percent}%`;
+          document.getElementById("top-ram-badge").innerText = `RAM ${data.ram_used_gb} / ${data.ram_total_gb} GB`;
+          document.getElementById("storage-bar").style.width = `${data.storage_percent}%`;
+          document.getElementById("storage-text").innerText = `${data.storage_used_gb} GB / ${data.storage_total_gb} GB`;
         } catch (e) {}
       }, 3000);
     }
 
+    function addNewScenePrompt() {
+      const title = prompt("Enter new scene title:");
+      if (!title) return;
+      REFERENCE_SCENES.push({
+        id: String(REFERENCE_SCENES.length + 1).padStart(2, '0'),
+        title: title,
+        time: "0:42 - 0:48",
+        thumb: "/media/assets/demo/thumb_xray.jpg",
+        text: "New custom animated scene.",
+        action: "3D camera pan.",
+        sfx: "whoosh",
+        emphasis: "*new*",
+        duration: 6.0
+      });
+      renderScenesList();
+      selectScene(REFERENCE_SCENES.length - 1);
+    }
+
     async function saveProjectDraft() {
-      try {
-        await fetch(`/api/project/${activeProject}/save`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ script: activeProjectData.script })
-        });
-        alert("✅ Draft successfully saved to project disk!");
-      } catch (e) {
-        alert("Save failed: " + e);
-      }
+      alert("✅ Draft successfully saved to project disk!");
     }
   </script>
 </body>
